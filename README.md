@@ -1,2 +1,0 @@
-# nanshusu.github.io
-Nanshusu
