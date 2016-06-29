@@ -57,15 +57,19 @@
 
 
 
-<meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Nanshusu's blog">
-<meta property="og:url" content="http://nanshusu.github.io/index.html">
+<meta name="description" content="内存屏障是一个很神奇的东西，之前翻译了linux内核文档memory-barriers.txt，对内存屏障有了一定有理解。现在用自己的方式来整理一下。在我看来，内存屏障主要解决了两个问题：单处理器下的乱序问题和多处理器下的内存同步问题。
+为什么会乱序现在的CPU一般采用流水线来执行指令。一个指令的执行被分成：取指、译码、访存、执行、写回、等若干个阶段。然后，多条指令可以同时存在于流水线中，同时被执">
+<meta property="og:type" content="article">
+<meta property="og:title" content=" linux内存屏障浅析">
+<meta property="og:url" content="http://nanshusu.github.io/2016/06/29/linux内存屏障浅析/index.html">
 <meta property="og:site_name" content="Nanshusu's blog">
-<meta property="og:description">
+<meta property="og:description" content="内存屏障是一个很神奇的东西，之前翻译了linux内核文档memory-barriers.txt，对内存屏障有了一定有理解。现在用自己的方式来整理一下。在我看来，内存屏障主要解决了两个问题：单处理器下的乱序问题和多处理器下的内存同步问题。
+为什么会乱序现在的CPU一般采用流水线来执行指令。一个指令的执行被分成：取指、译码、访存、执行、写回、等若干个阶段。然后，多条指令可以同时存在于流水线中，同时被执">
+<meta property="og:updated_time" content="2016-06-29T01:46:28.508Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Nanshusu's blog">
-<meta name="twitter:description">
+<meta name="twitter:title" content=" linux内存屏障浅析">
+<meta name="twitter:description" content="内存屏障是一个很神奇的东西，之前翻译了linux内核文档memory-barriers.txt，对内存屏障有了一定有理解。现在用自己的方式来整理一下。在我看来，内存屏障主要解决了两个问题：单处理器下的乱序问题和多处理器下的内存同步问题。
+为什么会乱序现在的CPU一般采用流水线来执行指令。一个指令的执行被分成：取指、译码、访存、执行、写回、等若干个阶段。然后，多条指令可以同时存在于流水线中，同时被执">
 
 
 
@@ -83,7 +87,7 @@
   };
 </script>
 
-  <title> Nanshusu's blog </title>
+  <title>  linux内存屏障浅析 | Nanshusu's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -104,9 +108,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -203,9 +205,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -225,10 +227,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/06/29/linux内存屏障浅析/" itemprop="url">
-                   linux内存屏障浅析
-                </a>
+                 linux内存屏障浅析
               
             
           </h1>
@@ -267,9 +266,7 @@
       
 
       
-        
-          
-            <p>内存屏障是一个很神奇的东西，之前翻译了linux内核文档memory-barriers.txt，对内存屏障有了一定有理解。现在用自己的方式来整理一下。<br>在我看来，内存屏障主要解决了两个问题：单处理器下的乱序问题和多处理器下的内存同步问题。</p>
+        <p>内存屏障是一个很神奇的东西，之前翻译了linux内核文档memory-barriers.txt，对内存屏障有了一定有理解。现在用自己的方式来整理一下。<br>在我看来，内存屏障主要解决了两个问题：单处理器下的乱序问题和多处理器下的内存同步问题。</p>
 <p>为什么会乱序<br>现在的CPU一般采用流水线来执行指令。一个指令的执行被分成：取指、译码、访存、执行、写回、等若干个阶段。然后，多条指令可以同时存在于流水线中，同时被执行。<br>指令流水线并不是串行的，并不会因为一个耗时很长的指令在“执行”阶段呆很长时间，而导致后续的指令都卡在“执行”之前的阶段上。<br>相反，流水线是并行的，多个指令可以同时处于同一个阶段，只要CPU内部相应的处理部件未被占满即可。比如说CPU有一个加法器和一个除法器，那么一条加法指令和一条除法指令就可能同时处于“执行”阶段, 而两条加法指令在“执行”阶段就只能串行工作。<br>相比于串行+阻塞的方式，流水线像这样并行的工作，效率是非常高的。</p>
 <p>然而，这样一来，乱序可能就产生了。比如一条加法指令原本出现在一条除法指令的后面，但是由于除法的执行时间很长，在它执行完之前，加法可能先执行完了。再比如两条访存指令，可能由于第二条指令命中了cache而导致它先于第一条指令完成。<br>一 般情况下，指令乱序并不是CPU在执行指令之前刻意去调整顺序。CPU总是顺序的去内存里面取指令，然后将其顺序的放入指令流水线。但是指令执行时的各种 条件，指令与指令之间的相互影响，可能导致顺序放入流水线的指令，最终乱序执行完成。这就是所谓的“顺序流入，乱序流出”。</p>
 <p>指令流水线除了在资源不足的情况下会卡住之外（如前所述的一个加法器应付两条加法指令的情况），指令之间的相关性也是导致流水线阻塞的重要原因。<br>CPU的乱序执行并不是任意的乱序，而是以保证程序上下文因果关系为前提的。有了这个前提，CPU执行的正确性才有保证。比如：</p>
@@ -299,12 +296,12 @@
 <p>  data = &newval;      val = *p;</p>
 <p>这里的屏障就可以保证：如果data指向了newval，那么newval一定是初始化过的。</p>
 
-          
-        
       
     </div>
 
     <div>
+      
+        
       
     </div>
 
@@ -312,258 +309,32 @@
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/04/05/hello-world.md/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
             
-              
-                
-                <a class="post-title-link" href="/2016/04/05/hello-world.md/" itemprop="url">
-                  未命名
-                </a>
-              
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
             
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-05T17:23:26+08:00" content="2016-04-05">
-              2016-04-05
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
+          </div>
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <!doctype html public '-//W3C//DTD HTML 4.0 Transitional //EN'>
-<html>
-<head>
-<title>hello-world</title>
-<meta charset="UTF-8">
-<meta name="generator" content="EverEdit">
-<link href="D:\Program Files\EverEdit\mode\markdown\default.css" rel="stylesheet">
-<link href="D:\Program Files\EverEdit\mode\markdown\prettify.css" rel="stylesheet">
-<script type="text/javascript" src="D:\Program Files\EverEdit\mode\markdown\prettify.js"></script>
-<script type="text/javascript" src="D:\Program Files\EverEdit\mode\markdown\jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="D:\Program Files\EverEdit\mode\markdown\toc.js"></script>
-</head>
-<body>
-<div id="generated-toc"></div>
-<hr>
-
-<h2>title: Hello World</h2>
-
-<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-
-<h2>Quick Start</h2>
-
-<h3>Create a new post</h3>
-
-<pre><code class=" bash">$ hexo new "My New Post"</code></pre>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-
-<h3>Run server</h3>
-
-<pre><code class=" bash">$ hexo server</code></pre>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-
-<h3>Generate static files</h3>
-
-<pre><code class=" bash">$ hexo generate</code></pre>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-
-<h3>Deploy to remote sites</h3>
-
-<pre><code class=" bash">$ hexo deploy</code></pre>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-<script type="text/javascript">
-$(document).ready(function(){
-  if($('code').length>0){
-    $('code').parent().addClass('prettyprint linenums');
-    prettyPrint();
-};
-});
-</script>
-</body>
-</html>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-      
 
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/30/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-30T17:55:33+08:00" content="2016-03-30">
-              2016-03-30
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-          
-        
+    <div class="post-spread">
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
@@ -571,6 +342,10 @@ $(document).ready(function(){
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -590,8 +365,17 @@ $(document).ready(function(){
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/default_avatar.jpg"
@@ -629,6 +413,17 @@ $(document).ready(function(){
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -713,6 +508,11 @@ $(document).ready(function(){
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/vendors/jquery-scrollintoview/jquery.scrollintoview.min.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
 
   
 
