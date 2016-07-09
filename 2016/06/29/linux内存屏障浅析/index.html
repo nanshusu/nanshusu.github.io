@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="linux,内存屏障," />
 
 
 
@@ -65,7 +65,7 @@
 <meta property="og:site_name" content="Nanshusu's blog">
 <meta property="og:description" content="内存屏障是一个很神奇的东西，之前翻译了linux内核文档memory-barriers.txt，对内存屏障有了一定有理解。现在用自己的方式来整理一下。在我看来，内存屏障主要解决了两个问题：单处理器下的乱序问题和多处理器下的内存同步问题。
 为什么会乱序现在的CPU一般采用流水线来执行指令。一个指令的执行被分成：取指、译码、访存、执行、写回、等若干个阶段。然后，多条指令可以同时存在于流水线中，同时被执">
-<meta property="og:updated_time" content="2016-06-29T01:46:28.508Z">
+<meta property="og:updated_time" content="2016-07-09T06:17:55.822Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content=" linux内存屏障浅析">
 <meta name="twitter:description" content="内存屏障是一个很神奇的东西，之前翻译了linux内核文档memory-barriers.txt，对内存屏障有了一定有理解。现在用自己的方式来整理一下。在我看来，内存屏障主要解决了两个问题：单处理器下的乱序问题和多处理器下的内存同步问题。
@@ -245,6 +245,25 @@
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -307,6 +326,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag">#linux</a>
+          
+            <a href="/tags/内存屏障/" rel="tag">#内存屏障</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
@@ -319,6 +346,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/09/KMP算法/" rel="prev" title="KMP算法">
+                KMP算法 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -386,13 +417,27 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
 
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
           
 
         </nav>
