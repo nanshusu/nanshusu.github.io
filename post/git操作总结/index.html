@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>git操作总结 - Nanshu&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="nanshusu" /><meta name="description" content="准备 任何人在使用git之前，都要提交简单的个人信息，以便git区分不同的提交者身份。 1 2 #git config –global user.name &amp;#34;your name&amp;#34; #git config –global user.email yourname@example.com 创建新" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://nanshusu.github.io/post/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="git操作总结" />
+<meta property="og:description" content="准备 任何人在使用git之前，都要提交简单的个人信息，以便git区分不同的提交者身份。 1 2 #git config –global user.name &#34;your name&#34; #git config –global user.email yourname@example.com 创建新" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nanshusu.github.io/post/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-08-26T18:40:22+00:00" />
+<meta property="article:modified_time" content="2021-08-26T18:40:22+00:00" />
+
+<meta itemprop="name" content="git操作总结">
+<meta itemprop="description" content="准备 任何人在使用git之前，都要提交简单的个人信息，以便git区分不同的提交者身份。 1 2 #git config –global user.name &#34;your name&#34; #git config –global user.email yourname@example.com 创建新"><meta itemprop="datePublished" content="2021-08-26T18:40:22+00:00" />
+<meta itemprop="dateModified" content="2021-08-26T18:40:22+00:00" />
+<meta itemprop="wordCount" content="1860">
+<meta itemprop="keywords" content="git,计算机," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="git操作总结"/>
+<meta name="twitter:description" content="准备 任何人在使用git之前，都要提交简单的个人信息，以便git区分不同的提交者身份。 1 2 #git config –global user.name &#34;your name&#34; #git config –global user.email yourname@example.com 创建新"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Nanshu</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Nanshu</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">git操作总结</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-08-26 </span>
+        <div class="post-category">
+            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"> 计算机 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#准备">准备</a></li>
+    <li><a href="#创建新仓库">创建新仓库</a></li>
+    <li><a href="#检出仓库">检出仓库</a></li>
+    <li><a href="#工作流">工作流</a></li>
+    <li><a href="#添加和提交">添加和提交</a></li>
+    <li><a href="#推送改动">推送改动</a></li>
+    <li><a href="#分支">分支</a></li>
+    <li><a href="#更新与合并">更新与合并</a></li>
+    <li><a href="#标签">标签</a></li>
+    <li><a href="#检查修改">检查修改</a></li>
+    <li><a href="#替换本地改动">替换本地改动</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="准备">准备</h1>
+<p>任何人在使用git之前，都要提交简单的个人信息，以便git区分不同的提交者身份。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#git config –global user.name &#34;your name&#34;</span>
+<span class="c1">#git config –global user.email yourname@example.com</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="创建新仓库">创建新仓库</h1>
+<p>先新建一个目录，例如名为myproject，然后所有的项目开发内容都在此目录下进行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#cd myproject</span>
+<span class="c1">#git init</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="检出仓库">检出仓库</h1>
+<p>本地：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#git clone /path/to/repository</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>远端：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#git clone username@host:/path/to/repository</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="工作流">工作流</h1>
+<p>本地仓库由git维护的三棵“树”组成。第一个是<font color=Red>工作目录</font>，它持有实际文件；第二个是<font color=Red>暂存区（Index）</font>，它像个缓存区域，临时保存改动；最后是<font color=Red>HEAD</font>，它指向最后一次提交的结果。
+<img src="01.png" alt="图1"></p>
+<h1 id="添加和提交">添加和提交</h1>
+<p>提出更改（把它们添加到暂存区）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#git add &lt;filename&gt;</span>
+<span class="c1">#git add *</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这是git基本工作流程的第一步；实际提交改动：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#git commit -m &#34;代码提交信息&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>现在，改动已经提交到了HEAD，但是还没到你的远端仓库。</p>
+<h1 id="推送改动">推送改动</h1>
+<p>改动现在已经在本地仓库的HEAD中了。执行如下命令以将这些改动提交到远端仓库：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#git push origin &lt;branch&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><branch>换成你想要推送的任何分支。</p>
+<p>如果还没有克隆（关联远程服务器）现有仓库，并欲将本地的仓库连接到某个远程服务器，可以使用如下命令添加：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#git remote add origin &lt;server&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果本地已经关联过其他远程服务器，可以使用如下命令切换远程服务器：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#git remote set-url origin &lt;server&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如此就能够将你的改动推送到所添加的服务器上去了。</p>
+<h1 id="分支">分支</h1>
+<p>分支是用来将特性开发绝缘开来的。在创建仓库的时候，master是“默认的”分支。在其他分支上进行开发，完成后再将它们合并到主分支上。
+<img src="02.png" alt="图2">
+创建一个叫做“feature_x”的分支，并切换过去：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#git checkout -b feature_x //等同于git branch feature_x 加 git checkout feature_x</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>切换回主分支：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#git checkout master</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>再把新建的分支删掉：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#git branch -d feature_x    //feature_x分支已提交，所以可安全删除此分支</span>
+<span class="c1">#git branch -D feature_x    //feature_x分支被证明失败，因此使用-D来放弃并删除该分支</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>关联本地分支和远程分支</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#git branch --set-upstream-to=origin/&lt;branch_remote&gt; &lt;branch_local&gt; //&lt;branch_remote&gt;和&lt;branch_local&gt;分别为远程和本地分支名，一般一样</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><font color=Red>关联之后才可以直接使用git pull和git push，不用再指定远程的分支（git push origin <branch>）</font></p>
+<p>删除远程分支</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#git branch -r -d origin/&lt;branch&gt; </span>
+<span class="c1">#git push origin :&lt;branch&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>一般情况下分支开发合并过程</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#git commit -a              //在分支改进完代码之后用commit在此分支中进行提交</span>
+<span class="c1">#git checkout master        //转移回master分支</span>
+<span class="c1">#git merge feature_x        //经证实分支开发成功，将feature_x分支合并到主分支</span>
+<span class="c1">#git commit -a              //彻底完成此次分支合并，即提交master分支</span>
+<span class="c1">#git branch -d feature_x    //因为experimental分支已提交，所以可安全删除此分支</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>除非将分支推送到远端仓库，不然该分支就是不为他人所见的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#git push origin &lt;branch&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="更新与合并">更新与合并</h1>
+<p>要更新本地仓库至最新改动，执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#git pull origin &lt;branch&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在本地的工作目录中获取（fetch）并合并（merge）远端的改动。
+要合并其他分支到当前分支（例如 master），执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#git merge &lt;branch&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在这两种情况下，git都会尝试去自动合并改动。遗憾的是，这可能并非每次都成功，并可能出现冲突（conflicts）。 这时候就需要修改这些文件来手动合并这些冲突（conflicts）。改完之后，需要执行如下命令以将它们标记为合并成功：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#git add &lt;filename&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在合并改动之前，可以使用如下命令预览差异：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#git diff &lt;source_branch&gt; &lt;target_branch&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="标签">标签</h1>
+<p>为软件发布创建标签是推荐的。可以执行如下命令创建一个叫做1.0.0的标签：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#git tag 1.0.0 1b2e1d63ff</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>1b2e1d63ff 是想要标记的提交ID的前10位字符。可以使用下列命令获取提交ID：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#git log</span>
+<span class="c1">#git log -p  //会输出非常详细的日志内容，包括了每次都做了哪些源码的修改</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>提交ID可以少一点，比如前8位，只要它的指向具有唯一性。</p>
+<h1 id="检查修改">检查修改</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#git diff           //这个命令只在 git add之前使用有效。如果已经 add了，那么此命令输出为空</span>
+<span class="c1">#git diff –cached  //这个命令在git add之后在git commit之前有效。</span>
+<span class="c1">#git status         //这个命令在git commit之前有效，表示都有哪些文件发生了改动</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="替换本地改动">替换本地改动</h1>
+<p>假如操作失误（当然，这最好永远不要发生），可以使用如下命令替换掉本地改动(<font color=Red>未执行git add操作</font>)：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#git checkout -- &lt;filename&gt;   //放弃修改某个文件</span>
+<span class="c1">#git checkout .               //放弃所有修改的文件</span>
+<span class="c1">#git restore .                //放弃所有修改的文件</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>此命令会使用HEAD中的最新内容替换掉你的工作目录中的文件。<font color=Red>已添加到暂存区的改动以及新文件都不会受到影响</font>。</p>
+<p>如果以之执行git add操作</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">git reset HEAD filepathname //恢复某个文件到工作区
+git reset HEAD .            //恢复所有文件到工作区
+git  reset                  //恢复所有文件到工作区
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：这里只是恢复到了工作区，如果想放弃修改的代码还需要执行上面<font color=Red>未执行git add</font>的操作</p>
+<p>假如想<font color=Red>丢弃在本地的所有改动与提交</font>，可以到服务器上获取最新的版本历史，并将你本地主分支指向它：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">git fetch origin
+git reset --hard origin/master
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">nanshusu</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-08-26
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/git/">git</a>
+          <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E5%AD%97%E7%AC%A6%E9%9B%86%E4%B8%8E%E7%BC%96%E7%A0%81/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">字符集与编码</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/kmp%E7%AE%97%E6%B3%95/">
+            <span class="next-text nav-default">KMP算法</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:nanshusu@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/nanshusu" class="iconfont icon-github" title="github"></a>
+  <a href="https://nanshusu.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>nanshusu</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

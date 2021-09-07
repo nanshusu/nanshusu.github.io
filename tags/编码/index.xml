@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>编码 on Nanshu&#39;s blog</title>
+    <link>https://nanshusu.github.io/tags/%E7%BC%96%E7%A0%81/</link>
+    <description>Recent content in 编码 on Nanshu&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 07 Sep 2021 15:58:08 +0800</lastBuildDate><atom:link href="https://nanshusu.github.io/tags/%E7%BC%96%E7%A0%81/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>字符集与编码</title>
+      <link>https://nanshusu.github.io/post/%E5%AD%97%E7%AC%A6%E9%9B%86%E4%B8%8E%E7%BC%96%E7%A0%81/</link>
+      <pubDate>Tue, 07 Sep 2021 15:58:08 +0800</pubDate>
+      
+      <guid>https://nanshusu.github.io/post/%E5%AD%97%E7%AC%A6%E9%9B%86%E4%B8%8E%E7%BC%96%E7%A0%81/</guid>
+      <description>我们都知道计算机是不能直接存储字母，数字，图片，符号等，计算机能处理和工作的唯一单位是”比特位（bit）”，一个比特位通常只有 0 和 1，是（y</description>
+    </item>
+    
+  </channel>
+</rss>

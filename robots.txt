@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://nanshusu.github.io/sitemap.xml

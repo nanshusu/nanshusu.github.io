@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Nanshu&#39;s blog</title>
+    <link>https://nanshusu.github.io/categories/</link>
+    <description>Recent content in Categories on Nanshu&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 07 Sep 2021 15:58:08 +0800</lastBuildDate><atom:link href="https://nanshusu.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>计算机</title>
+      <link>https://nanshusu.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/</link>
+      <pubDate>Tue, 07 Sep 2021 15:58:08 +0800</pubDate>
+      
+      <guid>https://nanshusu.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>方法论</title>
+      <link>https://nanshusu.github.io/categories/%E6%96%B9%E6%B3%95%E8%AE%BA/</link>
+      <pubDate>Thu, 26 Aug 2021 18:40:22 +0000</pubDate>
+      
+      <guid>https://nanshusu.github.io/categories/%E6%96%B9%E6%B3%95%E8%AE%BA/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>生活</title>
+      <link>https://nanshusu.github.io/categories/%E7%94%9F%E6%B4%BB/</link>
+      <pubDate>Thu, 26 Aug 2021 18:40:22 +0000</pubDate>
+      
+      <guid>https://nanshusu.github.io/categories/%E7%94%9F%E6%B4%BB/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

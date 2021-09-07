@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>字符集与编码 - Nanshu&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="nanshusu" /><meta name="description" content="我们都知道计算机是不能直接存储字母，数字，图片，符号等，计算机能处理和工作的唯一单位是”比特位（bit）”，一个比特位通常只有 0 和 1，是（y" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://nanshusu.github.io/post/%E5%AD%97%E7%AC%A6%E9%9B%86%E4%B8%8E%E7%BC%96%E7%A0%81/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="字符集与编码" />
+<meta property="og:description" content="我们都知道计算机是不能直接存储字母，数字，图片，符号等，计算机能处理和工作的唯一单位是”比特位（bit）”，一个比特位通常只有 0 和 1，是（y" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nanshusu.github.io/post/%E5%AD%97%E7%AC%A6%E9%9B%86%E4%B8%8E%E7%BC%96%E7%A0%81/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-09-07T15:58:08+08:00" />
+<meta property="article:modified_time" content="2021-09-07T15:58:08+08:00" />
+
+<meta itemprop="name" content="字符集与编码">
+<meta itemprop="description" content="我们都知道计算机是不能直接存储字母，数字，图片，符号等，计算机能处理和工作的唯一单位是”比特位（bit）”，一个比特位通常只有 0 和 1，是（y"><meta itemprop="datePublished" content="2021-09-07T15:58:08+08:00" />
+<meta itemprop="dateModified" content="2021-09-07T15:58:08+08:00" />
+<meta itemprop="wordCount" content="1705">
+<meta itemprop="keywords" content="字符集,编码," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="字符集与编码"/>
+<meta name="twitter:description" content="我们都知道计算机是不能直接存储字母，数字，图片，符号等，计算机能处理和工作的唯一单位是”比特位（bit）”，一个比特位通常只有 0 和 1，是（y"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Nanshu</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Nanshu</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">字符集与编码</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-09-07 </span>
+        <div class="post-category">
+            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"> 计算机 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents"></nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>我们都知道计算机是不能直接存储字母，数字，图片，符号等，计算机能处理和工作的唯一单位是”比特位（bit）”，一个比特位通常只有 0 和 1，是（yes）和否（no），真（true）或者假（false）等等我们喜欢的称呼。利用比特位序列来代表字母，数字，图片，符号等，我们就需要一个存储规则，不同的比特序列代表不同的字符，这就是所谓的“<strong>编码</strong>”。反之，将存储在计算机中的比特位序列（或者叫二进制序列）解析显示出来成对应的字母，数字，图片和符号，称为“<strong>解码</strong>”。提到编码不得不说到<strong>字符集</strong>，因为任何一种编码方式都会有一个字符集与之对应。</p>
+<p>然而计算机领域通常所讲的字符集实际上是指<strong>字符编码集</strong>，而不是传统意义上的字符库，除了包括一个系统支持的所有抽象字符（如国家文字、标点符号、图形符号、数字等）外，还包括字符所对应的一个数值，所以通常是一个二维表，下文提到的字符集都是指字符编码集。常见字符集如ASCII 字符集、ISO-8859-X、GB2312 字符集（简中）、BIG5 字符集（繁中）、GB18030 字符集、Shift-JIS等等。之前的很长一段时间内，字符集和字符编码区分不是很严格，因为<strong>一般一种字符集只对应一种编码格式</strong>，但是这些编码方式存在下面的问题：
+1、没有一种编码可以覆盖全世界所有国家的字符；
+2、各种编码之间也会存在冲突的现象，两种不同编码方式可能使用同一个编码代表不同的字符，亦或用不同的编码代表同一个字符；
+3、一个指定的机器（比如我们的服务器）将需要支持许多不同的编码方式，当数据在不同的机器之间传输或者在不同的编码之间转换时，很容易产生乱码问题。</p>
+<p>于是**ISO(国际标谁化组织)**开始着手解决这个问题。 它发起了ISO 10646项目， 名为“Universal Multiple Octet Coded Character Set”，简称UCS。方案中废弃了所有地方性的编码集方案，并尝试把它们融合在一个通用的编码集方案中。同时，<strong>统一码联盟Unicode</strong>(由各个大型企业及组织共同维护)发布了统一码(Unicode)项目。起初，UCS和Unicode并不兼容，但这俩项目本身就是为了解决冲突而生，搞出两套有何意义? 后来Unicode便与UCS统一了。目前的Unicode普遍采用的是UCS-2。</p>
+<p>虽然Unicode帮我们解决了字符集统一的问题，但这并不是没代价的。 在Unicode下所有的字符都是用2(UCS-2)或4(UCS-4)个字节来编码，甚至是ASCII字符。 这样便造成了大量浪费，尤其是在进行网络传输的时候。
+为了解决这一问题，科学家们定义了一种基于Unicode的便于传输的<strong>编码格式UTF(UCS Transfer Format)</strong>， UTF也有UTF-8、UTF-16、UTF-32这几个兄弟 横杠后的数字代表尝试将单个Unicode压缩成几bit。</p>
+<p>比如UTF-8它就将尝试用8bit来表示一个Unicode字。那么用8bit(1字节)来表示16bit(2字节)。 肯定会遇到撑不下的情况，怎么办?</p>
+<table>
+<thead>
+<tr>
+<th>十六进制</th>
+<th>二进制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0000 0000-0000 007F</td>
+<td>0xxxxxxx</td>
+</tr>
+<tr>
+<td>0000 0080-0000 07FF</td>
+<td>110xxxxx 10xxxxxx</td>
+</tr>
+<tr>
+<td>0000 0800-0000 FFFF</td>
+<td>1110xxxx 10xxxxxx 10xxxxxx</td>
+</tr>
+<tr>
+<td>0001 0000-0010 FFFF</td>
+<td>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</td>
+</tr>
+</tbody>
+</table>
+<p>上表中的x为UTF-8的可编码范围。它的转换规则如下:
+1、如果某字节第一位是0，那么判定为ASCII字节，除了0外余下的7位是ASCII码。所以UTF-8是兼容ASCII码的。
+2、如果第一个字节是1，那么连续的几个“1”代表了从这个字符开始，后面连续的几个字节其实是一个字位。且后面的位置都要是用10开头的。</p>
+<p>UTF-16与上面类似。它尝试用2字节来表示一个Unicode字，在UTF-16下如果表示UCS-2那么2字节基本足矣。 所以它主要是用来压缩UCS-4的, 当2字节搞不定时，就会尝试使用更多字节，实现原理和UTF-8类似。
+现在Windows下的Unicode实现大多使用的都是UTF-16</p>
+<p>windows下的ANSI“编码”
+windows下常见的是一种叫ANSI的编码。 但其实ANSI并不是一种“编码”，<strong>ANSI会根据操作系统系统所在的地域，自动指定为一种地域性的字符集（及其编码方式）</strong>， 如在简体中文的Windows下ANSI其实就是GBK，Windows默认使用ANSI，比如你建一个记事本文件，在里面的字默认会是ANSI的。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">nanshusu</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-09-07
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%AD%97%E7%AC%A6%E9%9B%86/">字符集</a>
+          <a href="/tags/%E7%BC%96%E7%A0%81/">编码</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/">
+            <span class="next-text nav-default">git操作总结</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:nanshusu@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/nanshusu" class="iconfont icon-github" title="github"></a>
+  <a href="https://nanshusu.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>nanshusu</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

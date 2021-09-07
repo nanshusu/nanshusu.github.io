@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nanshu&#39;s blog</title>
+    <link>https://nanshusu.github.io/</link>
+    <description>Recent content on Nanshu&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 07 Sep 2021 15:58:08 +0800</lastBuildDate><atom:link href="https://nanshusu.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>关于</title>
+      <link>https://nanshusu.github.io/about/</link>
+      <pubDate>Sun, 20 Aug 2017 21:38:52 +0800</pubDate>
+      
+      <guid>https://nanshusu.github.io/about/</guid>
+      <description>他很懒，什么介绍都没有！</description>
+    </item>
+    
+    <item>
+      <title>字符集与编码</title>
+      <link>https://nanshusu.github.io/post/%E5%AD%97%E7%AC%A6%E9%9B%86%E4%B8%8E%E7%BC%96%E7%A0%81/</link>
+      <pubDate>Tue, 07 Sep 2021 15:58:08 +0800</pubDate>
+      
+      <guid>https://nanshusu.github.io/post/%E5%AD%97%E7%AC%A6%E9%9B%86%E4%B8%8E%E7%BC%96%E7%A0%81/</guid>
+      <description>我们都知道计算机是不能直接存储字母，数字，图片，符号等，计算机能处理和工作的唯一单位是”比特位（bit）”，一个比特位通常只有 0 和 1，是（y</description>
+    </item>
+    
+    <item>
+      <title>git操作总结</title>
+      <link>https://nanshusu.github.io/post/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Thu, 26 Aug 2021 18:40:22 +0000</pubDate>
+      
+      <guid>https://nanshusu.github.io/post/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/</guid>
+      <description>准备 任何人在使用git之前，都要提交简单的个人信息，以便git区分不同的提交者身份。 1 2 #git config –global user.name &amp;#34;your name&amp;#34; #git config –global user.email yourname@example.com 创建新</description>
+    </item>
+    
+    <item>
+      <title>KMP算法</title>
+      <link>https://nanshusu.github.io/post/kmp%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Thu, 26 Aug 2021 18:40:22 +0000</pubDate>
+      
+      <guid>https://nanshusu.github.io/post/kmp%E7%AE%97%E6%B3%95/</guid>
+      <description>首先，字符串”BBC ABCDAB ABCDABCDABDE”的第一个字符与搜索词”ABCDABD”的第一个字符，进行比较。因为B与A不匹配，所以搜索词后</description>
+    </item>
+    
+    <item>
+      <title>linux内存屏障浅析</title>
+      <link>https://nanshusu.github.io/post/linux%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C%E6%B5%85%E6%9E%90/</link>
+      <pubDate>Thu, 26 Aug 2021 18:40:22 +0000</pubDate>
+      
+      <guid>https://nanshusu.github.io/post/linux%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C%E6%B5%85%E6%9E%90/</guid>
+      <description>内存屏障是一个很神奇的东西，之前翻译了linux内核文档memory-barriers.txt，对内存屏障有了一定有理解。现在用自己的方式来</description>
+    </item>
+    
+    <item>
+      <title>协程</title>
+      <link>https://nanshusu.github.io/post/%E5%8D%8F%E7%A8%8B/</link>
+      <pubDate>Thu, 26 Aug 2021 18:40:22 +0000</pubDate>
+      
+      <guid>https://nanshusu.github.io/post/%E5%8D%8F%E7%A8%8B/</guid>
+      <description>协程(Coroutine)编译器级的，进程(Process)和线程(Thread)操作系统级的 进程(Process)和线程(Thread)是</description>
+    </item>
+    
+    <item>
+      <title>第一性原理思维</title>
+      <link>https://nanshusu.github.io/post/%E7%AC%AC%E4%B8%80%E6%80%A7%E5%8E%9F%E7%90%86%E6%80%9D%E7%BB%B4/</link>
+      <pubDate>Thu, 26 Aug 2021 18:40:22 +0000</pubDate>
+      
+      <guid>https://nanshusu.github.io/post/%E7%AC%AC%E4%B8%80%E6%80%A7%E5%8E%9F%E7%90%86%E6%80%9D%E7%BB%B4/</guid>
+      <description>“第一性原理”是物理学的一个专业名词，是指某些硬性规定或者由此推演得出的结论。与之相对的则是“经验参数”，经验参数是通过大量实例得出的规律性</description>
+    </item>
+    
+    <item>
+      <title>荆州鱼糕</title>
+      <link>https://nanshusu.github.io/post/%E8%8D%86%E5%B7%9E%E9%B1%BC%E7%B3%95/</link>
+      <pubDate>Thu, 26 Aug 2021 18:40:22 +0000</pubDate>
+      
+      <guid>https://nanshusu.github.io/post/%E8%8D%86%E5%B7%9E%E9%B1%BC%E7%B3%95/</guid>
+      <description>转载至http://blog.sina.com.cn/s/blog_60d3a9d90100gtrf.html 相传，战国时期，楚都纪南城内有</description>
+    </item>
+    
+    <item>
+      <title>高效能人士的七个习惯</title>
+      <link>https://nanshusu.github.io/post/%E9%AB%98%E6%95%88%E8%83%BD%E4%BA%BA%E5%A3%AB%E7%9A%84%E4%B8%83%E4%B8%AA%E4%B9%A0%E6%83%AF/</link>
+      <pubDate>Thu, 26 Aug 2021 18:40:22 +0000</pubDate>
+      
+      <guid>https://nanshusu.github.io/post/%E9%AB%98%E6%95%88%E8%83%BD%E4%BA%BA%E5%A3%AB%E7%9A%84%E4%B8%83%E4%B8%AA%E4%B9%A0%E6%83%AF/</guid>
+      <description>积极主动 即采取主动，为自己过去、现在及未来的行为负责，积极主动摒弃了被动受害者的角色，不怨天尤人，发挥人类四项独特的禀赋——自觉、良知、想象</description>
+    </item>
+    
+    <item>
+      <title>魔方</title>
+      <link>https://nanshusu.github.io/post/%E9%AD%94%E6%96%B9/</link>
+      <pubDate>Thu, 26 Aug 2021 18:40:22 +0000</pubDate>
+      
+      <guid>https://nanshusu.github.io/post/%E9%AD%94%E6%96%B9/</guid>
+      <description>一 、魔方的结构 魔方共6色6面，每面又分为中央块（最中间的块6个）、角块（4角的块8个）和 边块（4条边中间的块12个）。其中中央块只有1个面，</description>
+    </item>
+    
+  </channel>
+</rss>
