@@ -205,7 +205,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="工作流">工作流</h1>
-<p>本地仓库由git维护的三棵“树”组成。第一个是<font color=Red>工作目录</font>，它持有实际文件；第二个是<font color=Red>暂存区（Index）</font>，它像个缓存区域，临时保存改动；最后是<font color=Red>HEAD</font>，它指向最后一次提交的结果。
+<p>本地仓库由git维护的三棵“树”组成。第一个是<font color=Red>工作目录</font>，它持有实际文件；第二个是<font color=Red>暂存区（Index）</font>，它像个缓存区域，临时保存改动；最后是<font color=Red>HEAD</font>，它指向最后一次提交的结果。<br>
 <img src="01.png" alt="图1"></p>
 <h1 id="添加和提交">添加和提交</h1>
 <p>提出更改（把它们添加到暂存区）</p>
@@ -260,8 +260,8 @@
 </div>
 </div><p>如此就能够将你的改动推送到所添加的服务器上去了。</p>
 <h1 id="分支">分支</h1>
-<p>分支是用来将特性开发绝缘开来的。在创建仓库的时候，master是“默认的”分支。在其他分支上进行开发，完成后再将它们合并到主分支上。
-<img src="02.png" alt="图2">
+<p>分支是用来将特性开发绝缘开来的。在创建仓库的时候，master是“默认的”分支。在其他分支上进行开发，完成后再将它们合并到主分支上。<br>
+<img src="02.png" alt="图2"><br>
 创建一个叫做“feature_x”的分支，并切换过去：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -348,7 +348,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#git pull origin &lt;branch&gt;</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>在本地的工作目录中获取（fetch）并合并（merge）远端的改动。
+</div><p>在本地的工作目录中获取（fetch）并合并（merge）远端的改动。<br>
 要合并其他分支到当前分支（例如 master），执行：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
