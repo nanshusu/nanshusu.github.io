@@ -5,7 +5,7 @@
     <link>https://nanshusu.github.io/</link>
     <description>Recent content on Nanshu&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
+    <language>en</language>
     <lastBuildDate>Tue, 07 Sep 2021 15:58:08 +0800</lastBuildDate><atom:link href="https://nanshusu.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>关于</title>
@@ -31,7 +31,7 @@
       <pubDate>Thu, 26 Aug 2021 18:40:22 +0000</pubDate>
       
       <guid>https://nanshusu.github.io/post/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/</guid>
-      <description>准备 任何人在使用git之前，都要提交简单的个人信息，以便git区分不同的提交者身份。 1 2 #git config –global user.name &amp;#34;your name&amp;#34; #git config –global user.email yourname@example.com 创建新</description>
+      <description>准备 任何人在使用git之前，都要提交简单的个人信息，以便git区分不同的提交者身份。 1 2 # git config –global user.name &amp;#34;your name&amp;#34; # git config –global user.email yourname@example.com 创</description>
     </item>
     
     <item>
