@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>KMS服务器搭建及系统激活 - Nanshu&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="nanshusu" /><meta name="description" content="准备KMS服务器 可以找网上现成的，也可以自己搭建: 1)下载KMS，vlmcsd 或者 vlmcsdmulti 百度/MEGA/github (前两个zip的解压密码为2" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://nanshusu.github.io/post/kms%E6%BF%80%E6%B4%BB/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="KMS服务器搭建及系统激活" />
+<meta property="og:description" content="准备KMS服务器 可以找网上现成的，也可以自己搭建: 1)下载KMS，vlmcsd 或者 vlmcsdmulti 百度/MEGA/github (前两个zip的解压密码为2" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nanshusu.github.io/post/kms%E6%BF%80%E6%B4%BB/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-08-26T18:40:22+00:00" />
+<meta property="article:modified_time" content="2021-08-26T18:40:22+00:00" />
+
+<meta itemprop="name" content="KMS服务器搭建及系统激活">
+<meta itemprop="description" content="准备KMS服务器 可以找网上现成的，也可以自己搭建: 1)下载KMS，vlmcsd 或者 vlmcsdmulti 百度/MEGA/github (前两个zip的解压密码为2"><meta itemprop="datePublished" content="2021-08-26T18:40:22+00:00" />
+<meta itemprop="dateModified" content="2021-08-26T18:40:22+00:00" />
+<meta itemprop="wordCount" content="2845">
+<meta itemprop="keywords" content="KMS,激活," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="KMS服务器搭建及系统激活"/>
+<meta name="twitter:description" content="准备KMS服务器 可以找网上现成的，也可以自己搭建: 1)下载KMS，vlmcsd 或者 vlmcsdmulti 百度/MEGA/github (前两个zip的解压密码为2"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Nanshu</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Nanshu</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">KMS服务器搭建及系统激活</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-08-26 </span>
+        <div class="post-category">
+            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"> 计算机 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#准备kms服务器">准备KMS服务器</a></li>
+    <li><a href="#激活windows">激活Windows</a>
+      <ul>
+        <li><a href="#slmgr命令激活">slmgr命令激活</a></li>
+        <li><a href="#vlmcs协助">vlmcs协助</a></li>
+      </ul>
+    </li>
+    <li><a href="#激活office">激活office</a></li>
+    <li><a href="#序列号">序列号</a></li>
+    <li><a href="#版本说明">版本说明</a>
+      <ul>
+        <li><a href="#1-msdn-版">1 MSDN 版</a></li>
+        <li><a href="#2-oem版">2 OEM版</a></li>
+        <li><a href="#3-rtm版">3 RTM版</a></li>
+        <li><a href="#4-rc版">4 RC版</a></li>
+        <li><a href="#5-vol版">5 VOL版</a></li>
+        <li><a href="#6-fpp零售版">6 FPP零售版</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="准备kms服务器">准备KMS服务器</h1>
+<p>可以找网上现成的，也可以自己搭建:<br>
+1)下载KMS，vlmcsd 或者 vlmcsdmulti <a href="https://pan.baidu.com/s/1d8mnX0qHvR4Q0bEXB_ciMQ?_at_=1632275003248">百度</a>/<a href="https://mega.nz/#!Z55AyJBC!UMhXr2bcUs3LUOA1R2m3reb-7RiTGoG0oncLx7rKDQw">MEGA</a>/<a href="https://github.com/Wind4/vlmcsd/releases">github</a> (前两个zip的解压密码为2017)<br>
+2)根据实际环境(CPU,32/64)选择运行文件，vlmcsd或者vlmcsdmulti文件均可<br>
+<img src="01.png" alt="图1"> <img src="02.png" alt="图2">￼ ￼<br>
+复制上面选择的文件到Linux中，并修改权限为可执行。<br>
+#本地</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># scp ./vlmcsd-x64-musl-static xxx@host.ip:/opt/kms/</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>#远端</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># chmod u+x /opt/kms/vlmcsd-x64-musl-static</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>3）运行vlmcsd并开启端口</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># ./vlmcsd-x64-musl-static 	#如果没有报错，就运行成功了，如果报错，检查端口占用</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>#centos开启端口对外访问</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># firewall-cmd --zone=public --add-port=1688/tcp --permanent </span>
+<span class="c1"># firewall-cmd reload</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>4）本地端口连通性测试<br>
+telnet you.host.ip port 	#如果能够连通，就可以进行下一步</p>
+<h1 id="激活windows">激活Windows</h1>
+<h2 id="slmgr命令激活">slmgr命令激活</h2>
+<p>管理员权限运行CMD或PowerShell</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd">slmgr /upk 				#是用于卸载当前电脑的密钥
+slmgr /ipk M7XTQ-FN8P6-TTKYV-9D4CC-J462D	#安装、替换现有的产品密钥。
+slmgr /skms 192.168.1.1			#设置KMS主机名。一般为IP地址
+slmgr /ato                                    	#激活
+</code></pre></td></tr></table>
+</div>
+</div><p>清除KMS信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd">slmgr /upk
+slmgr /ckms
+slmgr /rearm
+</code></pre></td></tr></table>
+</div>
+</div><p>重启之后按下win+R打开运行，键入：services.msc 点击确定打开服务；<br>
+打开服务后找到Software Protection服务，然后按鼠标右键弹出菜单中点击启动命令可清除完成！</p>
+<h2 id="vlmcs协助">vlmcs协助</h2>
+<p>选择32还是64请根据实际情况来。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd">./vlmcs-Windows-x64.exe -v -l 3 you.host.ip
+</code></pre></td></tr></table>
+</div>
+</div><p>#-v输出详细信息<br>
+#-l 3表示发送Windows 10 Enterprise 2016 LTSB的激活请求，具体版本对应列表可以通过./vlmcs-Windows-x64.exe -x查看</p>
+<p>如果，你不知道你的系统是什么版本，那么。。。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd">C<span class="p">:</span><span class="nl">\Users\xxxx</span>
+λ wmic os get caption
+Caption
+Microsoft Windows 10 企业版 LTSC
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="激活office">激活office</h1>
+<p>注意只能激活VOL版，如果不是需要转换成VOL版再激活(可以使用附件进行转化)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="k">cd</span> <span class="s2">&#34;C:\Program Files\Microsoft Office\Office16&#34;</span>		#进入office安装目录
+cscript ospp.vbs /unpkey:xxxxx	#卸载已安装的产品密钥。后面的数字是密钥的最后5位数
+cscript ospp.vbs /inpkey:XQNVK-8JYDB-WJ9W3-YJ8YR-WFG99	#替换VOL的密钥
+cscript ospp.vbs /inpkey:PD3PC-RHNGV-FXJ29-8JK7D-RJRJK
+cscript ospp.vbs /sethst:you-kms-server	#注册kms服务器地址
+cscript ospp.vbs /act	#执行激活
+cscript ospp.vbs /dstatus	#显示当前已安装产品密钥的许可证信息。可以查看到自已安裝的版本有多少个序列号。
+cscript ospp.vbs /remhst	#删除KMS主机名。
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="序列号">序列号</h1>
+<p>WIN10专业版：W269N-WFGWX-YVC9B-4J6C9-T83GX<br>
+WIN10企业版：NPPR9-FWDCX-D2C8J-H872K-2YT43<br>
+M7XTQ-FN8P6-TTKYV-9D4CC-J462D<br>
+office2016专业增强VL版：XQNVK-8JYDB-WJ9W3-YJ8YR-WFG99<br>
+Office Standard 2016：JNRGM-WHDWX-FJJG3-K47QV-DRTFM<br>
+Project Professional 2016：YG9NW-3K39V-2T3HJ-93F3Q-G83KT<br>
+Project Standard 2016：GNFHQ-F6YQM-KQDGJ-327XX-KQBVC<br>
+Visio Professional 2016：PD3PC-RHNGV-FXJ29-8JK7D-RJRJK<br>
+Visio Standard 2016：7WHWM-4T7MP-G96JF-G33KR-W8GF4<br>
+Access 2016：GNH9Y-D2J4T-FJHGG-QRVH7-QPFDW<br>
+Excel 2016：9C2PK-NWTVB-JMPW8-BFT28-7FTBF<br>
+OneNote 2016：DR92N-9HTF2-97XKM-XW2WJ-XW3J6<br>
+Outlook 2016：R69KK-NTPKF-7M3Q4-QYBHW-6MT9B<br>
+powerpoint 2016：J7MQP-HNJ4Y-WJ7YM-PFYGF-BY6C6<br>
+Publisher 2016：F47MM-N3XJP-TQXJ9-BP99D-8K837<br>
+SKype for Business 2016：869NQ-FJ69K-466HW-QYCP2-DDBV6<br>
+Word 2016：WXY84-JN2Q9-RBCCQ-3Q3J3-3PFJ6</p>
+<h1 id="版本说明">版本说明</h1>
+<h2 id="1-msdn-版">1 MSDN 版</h2>
+<p>MSDN(Microsoft Developer Network)软件是微软公司面向软件开发者的一种版本。MSDN 涵盖了所有可以被开发扩充的平台和应用程序，如微软公司的百科全书 Encarta，或者是各种游戏，是不包括在 MSDN 之内的，因为这些产品直接面向最终用户，没有进行程序开发的必要。<br>
+MSDN 在 Operating System 以上的等级都有附微软的软件授权，根据 MSDN 的使用者授权合约 (EULA)，软件只授权给使用 MSDN 的那一位开发人员，专供开发与测试之用，其他人不可使用 MSDN 所附软件。包含企业不能用 MSDN 附的 SQL Server Enterprise Edition 做为生产环境中的数据库服务器；秘书不能使用 MSDN 所附的 Office 2013 等等。</p>
+<h2 id="2-oem版">2 OEM版</h2>
+<p>OEM(Original Equipment Manufacturer)软件只能随机器出货，不能零售，所以也叫做随机版。OEM软件只能全新安装，不能从旧有操作系统升级。<br>
+如果买笔记型计算机或品牌计算机就会有随机版软件。包装不像零售版精美，通常只有一片cd和说明书(授权书)。这种系统通常会少一些驱动，而且目前的OEM软件很少放在光盘里能给你安装，要么就是恢复盘，要么就是硬盘镜像。</p>
+<h2 id="3-rtm版">3 RTM版</h2>
+<p>软件在正式在零售商店上架前，需要一段时间来压片，包装、配销，所以程序代码必须在正式发行前一段时间就要完成，这个完成的程序代码叫做 final.code，程序代码开发完成之后，要将母片送到工厂大量压片，这个版本就叫做RTM(Release to Manufacturing)版。<br>
+RTM版的程序码和正式版一样。但是和正式版也有不一样的地方：例如正式版中的oem不能升级安装，升级版要全新安装的话会检查旧版操作系统光盘等，这些就是rtm和正式版不同的地方，但是它们的主要程序代码都是一样的。严格的说这种版本还是属于fpp零售版，需要激活。</p>
+<h2 id="4-rc版">4 RC版</h2>
+<p>从微软的惯例来看推出RC版操作系统就代表正式版的操作系统已经离我们不远了，因为微软操作系统的开发步骤是这样的：内部测试-&gt;alpha公测-&gt;beta公测-&gt;RC(Release Candidate)版-&gt;正式版上市；通常微软的RC版本筛选会经历2-3个过程，也就是说微软会推出RC1、RC2或者RC3的操作系统，而随后就是正式版操作系统上市了，因此通常来看RC1版操作系统已经同最终零售版操作系统相差无几了。</p>
+<h2 id="5-vol版">5 VOL版</h2>
+<p>中文即团体批量许可证，根据这个许可，当企业或者政府需要大量购买一软件时可以获得优惠。这种产品的光盘的卷标都带有&quot;VOL&quot;(Volume Licensing for Organizations)字样，就取 &ldquo;Volume&quot;前3个字母，以表明是批量。这种版本根据购买数量等又细分为“开放式许可证”(Open License)、“选择式许可证(Select License)”、“企业协议(Enterprise Agreement)”、“学术教育许可证(Academic Volume Licensing)”等5种版本，上海政府 VOL 版XP就是这种批量购买的版本。根据 VOL 计划规定， VOL 产品是不需要激活的(无论升级到SP1还是SP2)。</p>
+<h2 id="6-fpp零售版">6 FPP零售版</h2>
+<p>FPP(Full Packaged Product)就是零售版（盒装软件），这种产品的光盘的卷标都带有&quot;FPP&quot;字样，比如英文WXP Pro的FPP版本的光盘卷标就是WXPFPP_EN，其中WX表示是Windows XP，P是Professional （H是Home），FPP表明是零售版本，EN是表明是英语。获得途径除了在商店购买之外，（H是Home），FPP表明是零售版本，EN是表明是英语。获得途径除了在商店购买之外，某些MSDN用户也可以得到。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">nanshusu</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-08-26
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/kms/">KMS</a>
+          <a href="/tags/%E6%BF%80%E6%B4%BB/">激活</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/kmp%E7%AE%97%E6%B3%95/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">KMP算法</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/linux%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C%E6%B5%85%E6%9E%90/">
+            <span class="next-text nav-default">linux内存屏障浅析</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:nanshusu@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/nanshusu" class="iconfont icon-github" title="github"></a>
+  <a href="https://nanshusu.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>nanshusu</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

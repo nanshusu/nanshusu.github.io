@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>读书笔记 on Nanshu&#39;s blog</title>
+    <link>https://nanshusu.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
+    <description>Recent content in 读书笔记 on Nanshu&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 26 Aug 2021 18:40:22 +0000</lastBuildDate><atom:link href="https://nanshusu.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CPU流水线</title>
+      <link>https://nanshusu.github.io/post/cpu%E6%B5%81%E6%B0%B4%E7%BA%BF/</link>
+      <pubDate>Thu, 26 Aug 2021 18:40:22 +0000</pubDate>
+      
+      <guid>https://nanshusu.github.io/post/cpu%E6%B5%81%E6%B0%B4%E7%BA%BF/</guid>
+      <description>流水线 流水线 ⑴ 流水线：指令从取值到真正执行的过程划分成多个小步骤，cpu真正开始执行指令序列时，一步压一步的执行，减少其等待时间。 ⑵ 流水线级</description>
+    </item>
+    
+    <item>
+      <title>如何阅读一本书</title>
+      <link>https://nanshusu.github.io/post/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E4%B8%80%E6%9C%AC%E4%B9%A6/</link>
+      <pubDate>Thu, 26 Aug 2021 18:40:22 +0000</pubDate>
+      
+      <guid>https://nanshusu.github.io/post/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E4%B8%80%E6%9C%AC%E4%B9%A6/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

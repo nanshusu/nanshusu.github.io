@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>CPU流水线 - Nanshu&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="nanshusu" /><meta name="description" content="流水线 流水线 ⑴ 流水线：指令从取值到真正执行的过程划分成多个小步骤，cpu真正开始执行指令序列时，一步压一步的执行，减少其等待时间。 ⑵ 流水线级" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="https://nanshusu.github.io/post/cpu%E6%B5%81%E6%B0%B4%E7%BA%BF/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="CPU流水线" />
+<meta property="og:description" content="流水线 流水线 ⑴ 流水线：指令从取值到真正执行的过程划分成多个小步骤，cpu真正开始执行指令序列时，一步压一步的执行，减少其等待时间。 ⑵ 流水线级" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nanshusu.github.io/post/cpu%E6%B5%81%E6%B0%B4%E7%BA%BF/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-08-26T18:40:22+00:00" />
+<meta property="article:modified_time" content="2021-08-26T18:40:22+00:00" />
+
+<meta itemprop="name" content="CPU流水线">
+<meta itemprop="description" content="流水线 流水线 ⑴ 流水线：指令从取值到真正执行的过程划分成多个小步骤，cpu真正开始执行指令序列时，一步压一步的执行，减少其等待时间。 ⑵ 流水线级"><meta itemprop="datePublished" content="2021-08-26T18:40:22+00:00" />
+<meta itemprop="dateModified" content="2021-08-26T18:40:22+00:00" />
+<meta itemprop="wordCount" content="4451">
+<meta itemprop="keywords" content="CPU," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CPU流水线"/>
+<meta name="twitter:description" content="流水线 流水线 ⑴ 流水线：指令从取值到真正执行的过程划分成多个小步骤，cpu真正开始执行指令序列时，一步压一步的执行，减少其等待时间。 ⑵ 流水线级"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Nanshu</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Nanshu</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">CPU流水线</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-08-26 </span>
+        <div class="post-category">
+            <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"> 读书笔记 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#流水线">流水线</a>
+      <ul>
+        <li><a href="#流水线-1">流水线</a></li>
+        <li><a href="#arm7的三级流水线">ARM7的三级流水线：</a></li>
+        <li><a href="#经典的mips5级流水线">经典的MIPS5级流水线</a></li>
+        <li><a href="#dsp对三级流水线的深层次扩展">DSP对三级流水线的深层次扩展</a></li>
+      </ul>
+    </li>
+    <li><a href="#流水线思想的冒险">流水线思想的冒险</a>
+      <ul>
+        <li><a href="#结构冒险不同阶段的执行步骤由于硬件资源冲突不能同时进行">结构冒险：不同阶段的执行步骤由于硬件资源冲突不能同时进行</a></li>
+        <li><a href="#数据冒险">数据冒险</a></li>
+        <li><a href="#控制冒险">控制冒险：</a></li>
+      </ul>
+    </li>
+    <li><a href="#流水线的分支预测">流水线的分支预测</a>
+      <ul>
+        <li><a href="#1-bit预测算法">1-bit预测算法：</a></li>
+        <li><a href="#2-bit预测算法">2-bit预测算法：</a></li>
+        <li><a href="#intel的分支预测实现">Intel的分支预测实现</a></li>
+      </ul>
+    </li>
+    <li><a href="#指令的乱序执行">指令的乱序执行</a>
+      <ul>
+        <li><a href="#乱序执行">乱序执行</a></li>
+        <li><a href="#指令相关性">指令相关性</a></li>
+        <li><a href="#控制相关">控制相关</a></li>
+        <li><a href="#去除指令相关">去除指令相关</a></li>
+        <li><a href="#去除控制相关">去除控制相关</a></li>
+        <li><a href="#去除伪相关wawwar">去除伪相关：WAW，WAR</a></li>
+      </ul>
+    </li>
+    <li><a href="#cpu如何进行乱序执行">CPU如何进行乱序执行</a>
+      <ul>
+        <li><a href="#buffer">Buffer</a></li>
+        <li><a href="#指令调度">指令调度</a></li>
+      </ul>
+    </li>
+    <li><a href="#处理器并行架构">处理器并行架构</a>
+      <ul>
+        <li><a href="#flynn分类">Flynn分类</a></li>
+        <li><a href="#指令并行">指令并行</a>
+          <ul>
+            <li><a href="#数据并行">数据并行</a></li>
+          </ul>
+        </li>
+        <li><a href="#线程并行">线程并行</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="流水线">流水线</h1>
+<h2 id="流水线-1">流水线</h2>
+<p>⑴ 流水线：指令从取值到真正执行的过程划分成多个小步骤，cpu真正开始执行指令序列时，一步压一步的执行，减少其等待时间。<br>
+⑵ 流水线级数越多，工作效率越高。intel处理器的流水线级数远超过嵌入式cpu的流水线级数<br>
+⑶ 流水线的效率：<br>
+⒜ 并非指令每一步的操作时间都是等长的。长节拍的步骤会导致流水线效率下降（短节拍的步骤要等待长节拍的步骤执行完毕）<br>
+⒝ 解决办法：<br>
+Ⅰ拆分长节拍<br>
+<img src="01.png" alt="图1"><br>
+Ⅱ 增加长节拍的处理单元：使得同时间产生多个长节拍的执行结果，供短节拍的动作使用。<br>
+<img src="02.png" alt="图2"><br>
+eg：长节拍是短节拍执行时间的3倍，则可以增加为3个长节拍执行单元，1个短节拍执行单元</p>
+<h2 id="arm7的三级流水线">ARM7的三级流水线：</h2>
+<p>ARM7把知道指令执行的时间分为3个步骤：取指IF，译码ID，执行EX<br>
+<img src="03.png" alt="图3"></p>
+<h2 id="经典的mips5级流水线">经典的MIPS5级流水线</h2>
+<p>⑴ 处理器内部有很多程序员可见的通用寄存器，这些通用寄存器组成了寄存器堆register file<br>
+⑵ 为了让不同流水线之间的数据不会互相打扰，cpu在每个阶段会把通用寄存器中的值拷贝到流水线寄存器中，使得各个节拍的工作不会乱序。<br>
+⑶ 汇编语言中，ALU执行单元直接访问通用寄存器，而在硬件实现中，通用寄存器的值先拷贝到ALU输入寄存器中(一个流水线寄存器)，然后再送回通用寄存器<br>
+⑷ MIPS在3级流水线的基础上，增加了2个阶段，1个是从内存获取数据的mem阶段，另一个是把ALU计算后的数据导出到通用寄存器堆的WB阶段</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">IF -&gt; ID -&gt; EX -&gt; MEM -&gt; WB
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="04.png" alt="图4"></p>
+<h2 id="dsp对三级流水线的深层次扩展">DSP对三级流水线的深层次扩展</h2>
+<p>⑴ DSP处理器把取指,译码,执行的三大步骤细分为多个小步骤<br>
+⑵ MIPS处理器把MEM和ALU计算放在不同阶段，写回通用寄存器也单独形成一个阶段。而DSP把MEM和WB阶段都放在了指令执行阶段，更符合程序员的视角。<br>
+<img src="05.png" alt="图5"></p>
+<h1 id="流水线思想的冒险">流水线思想的冒险</h1>
+<h2 id="结构冒险不同阶段的执行步骤由于硬件资源冲突不能同时进行">结构冒险：不同阶段的执行步骤由于硬件资源冲突不能同时进行</h2>
+<p>MIPS处理器的流水线中，IF阶段需要访问存储器拿指令，MEM阶段需要访问存储器拿数据，这两个动作都要访问存储器，造成存储器和寄存器之间的总线冲突，而不能同时进行。但是，现代处理器，程序被存储在L1P Cache中，数据被存在L1D Cache中，所以不会冲突。<br>
+<img src="06.png" alt="图6"></p>
+<h2 id="数据冒险">数据冒险</h2>
+<p>⑴ 流水线使得原先有先后顺序的指令同时处理，当出现某些指令组合时，可能会导致使用了错误的数据。<br>
+<img src="07.png" alt="图7"><br>
+⑵ 因此，cpu采用直通(forwarding)来解决：如果当前指令的源操作数在EX/MEM的流水线寄存器中，就直接将流水线寄存器中的值传递给ALU输入，不去通用寄存器堆取值<br>
+⑶ 但不是所有数据冲突都能采用直通解决，要配置cycle等待<br>
+sub指令的R1,最早也要在cycle4中才能到MEM/EX流水线寄存器，所以仍要掩饰一个周期</p>
+<h2 id="控制冒险">控制冒险：</h2>
+<p>⑴ 当一条流水线中的指令出现跳转操作时，其他流水线提前做出的操作是根据pc+1进行取指的，跳转操作使得这些流水线上的操作全部无效<br>
+⑵ 流水线等级越深，跳转指令造成的效率下降约严重</p>
+<h1 id="流水线的分支预测">流水线的分支预测</h1>
+<h2 id="1-bit预测算法">1-bit预测算法：</h2>
+<p>如果该指令上次发生跳转，则预测这一次也会发生跳转</p>
+<h2 id="2-bit预测算法">2-bit预测算法：</h2>
+<p>每个指令的预测状态信息从1bit加到2bit，如果这个跳转执行了，就+1，加到3就不加了，如果跳转信息不执行就-1，减到0就不减了。如果计数器值为0/1，就预测不执行，计数器为2/3，就预测执行。</p>
+<h2 id="intel的分支预测实现">Intel的分支预测实现</h2>
+<p>⑴ 前面2个是算法思想，Intel在此基础上进行了一系列的设计。Intel分支预测包含3个单元：Branch Target Buffer（BTB），The Static Predictor，Return Stack</p>
+<h1 id="指令的乱序执行">指令的乱序执行</h1>
+<h2 id="乱序执行">乱序执行</h2>
+<p>指令在执行时，常常因为一些限制而等待。例如，MEM阶段访问的数据不在cache中，需要从外部存储器获取，这个动作需要几十个cycle，如果顺序执行，后面的指令MEM都要等待这个指令操作完成。乱序执行是说，先执行后面不依赖该数据的指令。</p>
+<h2 id="指令相关性">指令相关性</h2>
+<p>⑴ 寄存器相关：当2条指令公用寄存器时，他们就有可能相关。<br>
+⒜ 先读后读</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ADD BX,AX   
+ADD CX,AX   #2条指令先后读取AX寄存器
+</code></pre></td></tr></table>
+</div>
+</div><p>⒝ 先写后读 (RAW:Read after Write)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ADD BX,AX
+ADD CX,BX   #后面的指令依赖前面的指令。先写BX，后读BX,指令间存在数据流动
+</code></pre></td></tr></table>
+</div>
+</div><p>⒞ 先读后写 (WAR:Write after read)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ADD BX,AX
+MOV AX,CX   #指令1读AX，指令2写AX，逻辑上本没有相关性，但X86cpu的寄存器太少，指令要公用寄存器，导致指令相关
+</code></pre></td></tr></table>
+</div>
+</div><p>⒟ 先写后写（WAW）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">MOV AX,BX
+MOV AX,CX   #输出到同一个寄存器
+</code></pre></td></tr></table>
+</div>
+</div><p>【注】：WAR和WAW在2条指令间没有数据流动，被称为伪相关。</p>
+<h2 id="控制相关">控制相关</h2>
+<p>前一条指令是跳转指令，而后一条指令的执行需要跳转指令的结果，这就是控制相关</p>
+<h2 id="去除指令相关">去除指令相关</h2>
+<p>去除数据相关的动作不是由cpu进行的，而是由编译器和程序员进行处理的</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">x = a + b
+y = x + c
+z = y + d   // x,y,z产生深度相关// 改造后x = a + b
+y = b + c
+z = x + y   // 此时去除了x,y间的相关性
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="去除控制相关">去除控制相关</h2>
+<p>投机执行：cpu会根据跳转预测的结果，可能会提前把跳转后的指令放到跳转指令前面执行，是一种预测的投机行为。现代分支预测的准确性能达到98%以上，所以可以一定程度上去除控制相关</p>
+<h2 id="去除伪相关wawwar">去除伪相关：WAW，WAR</h2>
+<p>⑴ 处理器的ISA寄存器数目通常较少(暴露给程序员的寄存器)，因此会导致多个变量映射到同一个寄存器中，这样即使指令逻辑上是不相关的，也会因为使用了同一个寄存器而产生相关。<br>
+⑵ 通过把相同的ISA寄存器，映射到不同的物理寄存器来解决伪相关(名字相关)<br>
+⑶ 映射策略：<br>
+⒜ 将每条指令的目的寄存器映射到新的物理寄存器<br>
+⒝ 将指令的源寄存器映射到ISA寄存器最近映射到的那个物理寄存器上<br>
+⒞ 本条指令执行后，该目的寄存器映射的更早的物理寄存器就可以释放了<br>
+<img src="08.png" alt="图8"></p>
+<p>一开始R1，R2，R3，R4分别映射到F1，F2，F3，F4寄存器<br>
+第一条指令R3是目的寄存器，映射到新物理寄存器F5<br>
+这种方式会把物理寄存器用光，所以每次映射完毕都要实时释放：R4寄存器开始映射到F4寄存器，指令2结束后，R4映射到F6寄存器，此时，原先的F4寄存器就可以释放了</p>
+<h1 id="cpu如何进行乱序执行">CPU如何进行乱序执行</h1>
+<h2 id="buffer">Buffer</h2>
+<p>CPU内部要提供能够缓存多条指令的Buffer，才能达到乱序执行的效果</p>
+<h2 id="指令调度">指令调度</h2>
+<p>⑴ 指令有操作数和操作码，操作码描述指令做什么(cpu分配什么样的执行单元)；而寄存器重命名后，目的寄存器总是新的，所以指令能否执行，和目的操作数已经无关，和操作码和源操作数有关<br>
+⑵ 指令可以被执行的2个条件，除了这2个条件，指令不用再等待前面的指令执行完毕</p>
+<p>cpu中是否有空闲的执行单元执行这条指令(操作码)<br>
+该指令的源操作数是否已经准备好<br>
+指令结果顺序提交<br>
+⑴ 指令执行顺序虽然是乱序的，但是指令结果的提交顺序一定要是顺序的。因为“精确中断”的存在<br>
+⑵ 精确中断：指令执行过程中，来了一个中断，此时cpu要将ISA寄存器压栈，执行中断服务程序，然后执行中断后面的指令。而精确中断要求终端钱的指令全部执行，中断后的指令一个都不执行。而在乱序执行内核中，终端后面的指令可能放在中断前面的指令执行<br>
+⑶ 所以，cpu引入重排序缓冲区，用来缓冲指令的执行结果，这些结果会被顺序的提交到寄存器中，来实现精确中断。</p>
+<h1 id="处理器并行架构">处理器并行架构</h1>
+<h2 id="flynn分类">Flynn分类</h2>
+<p>1966年，Flynn将处理器系统结构分成4类<br>
+⑴ SISD：处理器有一次处理一条指令，每条指令处理一份数据 （single instruction single data）<br>
+⑵ SIMD：一次处理一条数据，一条指令可以处理多分数据（数据并行）<br>
+⑶ MISD：一次处理多条指令，每条指令处理一份数据（此设计无用）<br>
+⑷ MIMD：一次处理多条指令，每条指令可以处理多分数据</p>
+<h2 id="指令并行">指令并行</h2>
+<p>⑴ 发射单元一次发射多条指令，就能达到指令并行（multi issue）<br>
+⑵ multi-issue的2种方式<br>
+i. SuperScalar：超标量(硬件)<br>
+a. 超标量是cpu内部增加一个硬件单元，负责把穿行指令输入进行并行化处理。<br>
+b. 奔腾4采用超标量进行指令并行<br>
+ii. VLIW：超长指令字（软件）<br>
+a. 超长指令字是编译器或程序员在汇编语言中声明多条指令要在一个cycle内执行。||符号链接2条指令<br>
+b. TI C6000 DSP采用超长指令字进行指令并行<br>
+⑶ 超标量由于需要增加电路设计，增大了功耗，超标量在执行阶段制定并行。x86为了保证程序兼容性，不能不采用超标量，而后来的RISC处理器，则可以采用超长指令字VIEW结构<br>
+⑷ 并行性上来讲，VIEW更胜一筹，因为他从源头实现了指令并行，擅长于数据密集型运算。但发生cache miss，执行跳转时，VIEW无能为力，采用乱序执行+超标量处理器则能将后面的指令提前执行，因此乱序+超标量适合负责的控制类程序。</p>
+<h3 id="数据并行">数据并行</h3>
+<p>⑴ 多媒体程序有一个特点：同一个操作应用于多个数据，于是SIMD产生出来<br>
+⑵ Intel的MMD,SSE2,SSE3,SSE4.1,SSE4.2,AVX指令集都是SIMD的。AMD的3DNOW！,SSE5指令集也是SIMD<br>
+⑶ MMX指令一次可处理64bit数据，SSX指令一次可处理128bit数据<br>
+⑷ 几种不同的SSE指令<br>
+⒜ 垂直计算<br>
+SSE指令把需要操作的2个寄存器中的数划分成对应的几个段，2个寄存器对应段中的数据进行操作<br>
+⒝ 水平计算<br>
+2个源操作数来自于同一个寄存器<br>
+⒞ 标量计算<br>
+a. 类似于垂直计算的2个寄存器分段，不同的是标量计算可以只计算2个寄存器中对应的1个段，而其他段保持不变<br>
+b. 如下，只有x0和y0进行操作，而其他段保持不练<br>
+<img src="09.png" alt="图9"></p>
+<h2 id="线程并行">线程并行</h2>
+<p>⑴ 软件多线程：时分复用操作系统<br>
+⑵ 硬件多线程<br>
+⒜ 粗粒度硬件多线程：<br>
+当处理器发现一个线程被长时间阻塞，eg：cache miss，发射器就发射另一个线程的指令<br>
+⒝ 细粒度硬件多线程<br>
+处理器每个cycle发送不同线程的指令<br>
+⒞ 同时多线程<br>
+超标量处理器同一时间可以发送多条指令，这些指令来自于不同线程<br>
+⑶ 多核处理器架构<br>
+<img src="10.png" alt="图10"><br>
+Ⅰ p:processor处理核心，c:cache缓存，s:switch用于核间通信。线条表示通信路径<br>
+Ⅱ Bus Multicore结构多核：设计简单，但任意两个核心通信都要占用总线，导致其他核心不能通信，降低效率。<br>
+Ⅲ Swich Multicore结构多核：任意两个核心间右独立的通信连线。1,2核心通信不会阻塞3,4核心通信。但这种方式消耗大量互联资源，4核心时通常使用SwitchMulticore,核心数量再多则资源浪费<br>
+Ⅳ Ring Multicore结构多核：改进了Bus结构，1和3通信要经过2，相邻的两个核心通信速度最快.通常8核心使采用这种结构<br>
+Ⅴ Mesh Multicore结构多核：类似于二维的Ring结构。核心太多时，switch结构就会导致连线过于复杂。Mesh结构利于扩展，效率高。64核心等众核可以采用这个设计。</p>
+<p>⑷ 各种硬件多线程的对比<br>
+<img src="11.png" alt="图11"><br>
+⒜ 图形解释： 每行代表一个cycle<br>
+⒝ 每列代表一个功能单元<br>
+Ⅰ 第一个是单线程处理器，大量功能单元空闲，有时if，id阶段的所有控制单元空闲<br>
+Ⅱ 细粒度多线程：每个cycle发送不同线程的指令<br>
+Ⅲ 粗粒度多线程：当cpu发现线程阻塞时(cache miss)，就发射另一个线程的指令<br>
+Ⅳ 多核心技术：每个核心2个功能单元，没有硬件多线程，2个核心分别处理2个不同的线程<br>
+Ⅴ 同时多线程：功能单元的利用率最高，超标量cpu同时发送多个线程的指令，每个线程使用不同的功能单元</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">nanshusu</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-08-26
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/cpu/">CPU</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E5%AD%97%E7%AC%A6%E9%9B%86%E4%B8%8E%E7%BC%96%E7%A0%81/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">字符集与编码</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/">
+            <span class="next-text nav-default">git操作总结</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:nanshusu@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/nanshusu" class="iconfont icon-github" title="github"></a>
+  <a href="https://nanshusu.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>nanshusu</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

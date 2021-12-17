@@ -5,7 +5,7 @@
     <link>https://nanshusu.github.io/post/</link>
     <description>Recent content in Posts on Nanshu&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
+    <language>en</language>
     <lastBuildDate>Tue, 07 Sep 2021 15:58:08 +0800</lastBuildDate><atom:link href="https://nanshusu.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>字符集与编码</title>
@@ -17,12 +17,21 @@
     </item>
     
     <item>
+      <title>CPU流水线</title>
+      <link>https://nanshusu.github.io/post/cpu%E6%B5%81%E6%B0%B4%E7%BA%BF/</link>
+      <pubDate>Thu, 26 Aug 2021 18:40:22 +0000</pubDate>
+      
+      <guid>https://nanshusu.github.io/post/cpu%E6%B5%81%E6%B0%B4%E7%BA%BF/</guid>
+      <description>流水线 流水线 ⑴ 流水线：指令从取值到真正执行的过程划分成多个小步骤，cpu真正开始执行指令序列时，一步压一步的执行，减少其等待时间。 ⑵ 流水线级</description>
+    </item>
+    
+    <item>
       <title>git操作总结</title>
       <link>https://nanshusu.github.io/post/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/</link>
       <pubDate>Thu, 26 Aug 2021 18:40:22 +0000</pubDate>
       
       <guid>https://nanshusu.github.io/post/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/</guid>
-      <description>准备 任何人在使用git之前，都要提交简单的个人信息，以便git区分不同的提交者身份。 1 2 #git config –global user.name &amp;#34;your name&amp;#34; #git config –global user.email yourname@example.com 创建新</description>
+      <description>准备 任何人在使用git之前，都要提交简单的个人信息，以便git区分不同的提交者身份。 1 2 # git config –global user.name &amp;#34;your name&amp;#34; # git config –global user.email yourname@example.com 创</description>
     </item>
     
     <item>
@@ -35,6 +44,15 @@
     </item>
     
     <item>
+      <title>KMS服务器搭建及系统激活</title>
+      <link>https://nanshusu.github.io/post/kms%E6%BF%80%E6%B4%BB/</link>
+      <pubDate>Thu, 26 Aug 2021 18:40:22 +0000</pubDate>
+      
+      <guid>https://nanshusu.github.io/post/kms%E6%BF%80%E6%B4%BB/</guid>
+      <description>准备KMS服务器 可以找网上现成的，也可以自己搭建: 1)下载KMS，vlmcsd 或者 vlmcsdmulti 百度/MEGA/github (前两个zip的解压密码为2</description>
+    </item>
+    
+    <item>
       <title>linux内存屏障浅析</title>
       <link>https://nanshusu.github.io/post/linux%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C%E6%B5%85%E6%9E%90/</link>
       <pubDate>Thu, 26 Aug 2021 18:40:22 +0000</pubDate>
@@ -44,12 +62,30 @@
     </item>
     
     <item>
+      <title>人工智能</title>
+      <link>https://nanshusu.github.io/post/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</link>
+      <pubDate>Thu, 26 Aug 2021 18:40:22 +0000</pubDate>
+      
+      <guid>https://nanshusu.github.io/post/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</guid>
+      <description>什么是人工智能 人工智能（Artificial Intelligence），英文缩写为AI。它是研究、开发用于模拟、延伸和扩展人的智能的理论、方</description>
+    </item>
+    
+    <item>
       <title>协程</title>
       <link>https://nanshusu.github.io/post/%E5%8D%8F%E7%A8%8B/</link>
       <pubDate>Thu, 26 Aug 2021 18:40:22 +0000</pubDate>
       
       <guid>https://nanshusu.github.io/post/%E5%8D%8F%E7%A8%8B/</guid>
       <description>协程(Coroutine)编译器级的，进程(Process)和线程(Thread)操作系统级的 进程(Process)和线程(Thread)是</description>
+    </item>
+    
+    <item>
+      <title>如何阅读一本书</title>
+      <link>https://nanshusu.github.io/post/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E4%B8%80%E6%9C%AC%E4%B9%A6/</link>
+      <pubDate>Thu, 26 Aug 2021 18:40:22 +0000</pubDate>
+      
+      <guid>https://nanshusu.github.io/post/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E4%B8%80%E6%9C%AC%E4%B9%A6/</guid>
+      <description></description>
     </item>
     
     <item>

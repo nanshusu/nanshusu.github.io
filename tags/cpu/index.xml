@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CPU on Nanshu&#39;s blog</title>
+    <link>https://nanshusu.github.io/tags/cpu/</link>
+    <description>Recent content in CPU on Nanshu&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 26 Aug 2021 18:40:22 +0000</lastBuildDate><atom:link href="https://nanshusu.github.io/tags/cpu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CPU流水线</title>
+      <link>https://nanshusu.github.io/post/cpu%E6%B5%81%E6%B0%B4%E7%BA%BF/</link>
+      <pubDate>Thu, 26 Aug 2021 18:40:22 +0000</pubDate>
+      
+      <guid>https://nanshusu.github.io/post/cpu%E6%B5%81%E6%B0%B4%E7%BA%BF/</guid>
+      <description>流水线 流水线 ⑴ 流水线：指令从取值到真正执行的过程划分成多个小步骤，cpu真正开始执行指令序列时，一步压一步的执行，减少其等待时间。 ⑵ 流水线级</description>
+    </item>
+    
+  </channel>
+</rss>
