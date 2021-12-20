@@ -49,7 +49,7 @@
 <meta itemprop="name" content="git操作总结">
 <meta itemprop="description" content="准备 任何人在使用git之前，都要提交简单的个人信息，以便git区分不同的提交者身份。 1 2 # git config –global user.name &#34;your name&#34; # git config –global user.email yourname@example.com 创"><meta itemprop="datePublished" content="2021-08-26T18:40:22+00:00" />
 <meta itemprop="dateModified" content="2021-08-26T18:40:22+00:00" />
-<meta itemprop="wordCount" content="1903">
+<meta itemprop="wordCount" content="2068">
 <meta itemprop="keywords" content="git,计算机," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="git操作总结"/>
 <meta name="twitter:description" content="准备 任何人在使用git之前，都要提交简单的个人信息，以便git区分不同的提交者身份。 1 2 # git config –global user.name &#34;your name&#34; # git config –global user.email yourname@example.com 创"/>
@@ -146,6 +146,7 @@
     <li><a href="#标签">标签</a></li>
     <li><a href="#检查修改">检查修改</a></li>
     <li><a href="#替换本地改动">替换本地改动</a></li>
+    <li><a href="#误操作导致本地修改丢失的恢复">误操作导致本地修改丢失的恢复</a></li>
   </ul>
 </nav>
   </div>
@@ -426,7 +427,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># git reset HEAD filepathname //恢复某个文件到工作区</span>
 <span class="c1"># git reset HEAD .            //恢复所有文件到工作区</span>
-<span class="c1"># git  reset                  //恢复所有文件到工作区</span>
+<span class="c1"># git reset                   //恢复所有文件到工作区</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>注意：这里只是恢复到了工作区，如果想放弃修改的代码还需要执行上面<font color=Red>未执行git add</font>的操作</p>
@@ -439,6 +440,48 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># git fetch origin</span>
 <span class="c1"># git reset --hard origin/master</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="误操作导致本地修改丢失的恢复">误操作导致本地修改丢失的恢复</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># git reflog</span>
+99e0e21 <span class="o">(</span>HEAD -&gt; hugo, origin/hugo<span class="o">)</span> HEAD@<span class="o">{</span>0<span class="o">}</span>: pull --no-rebase: Merge made by the <span class="s1">&#39;ort&#39;</span> strategy.
+6af73cd HEAD@<span class="o">{</span>1<span class="o">}</span>: reset: moving to 6af73cd
+4c8efed HEAD@<span class="o">{</span>2<span class="o">}</span>: reset: moving to HEAD
+4c8efed HEAD@<span class="o">{</span>3<span class="o">}</span>: pull: Fast-forward
+91ed6e0 HEAD@<span class="o">{</span>4<span class="o">}</span>: reset: moving to HEAD^
+6af73cd HEAD@<span class="o">{</span>5<span class="o">}</span>: commit: <span class="m">20211217</span>
+91ed6e0 HEAD@<span class="o">{</span>6<span class="o">}</span>: commit: <span class="m">20210908</span>
+d4644c9 HEAD@<span class="o">{</span>7<span class="o">}</span>: commit: <span class="m">20210908</span>
+632a8ef HEAD@<span class="o">{</span>8<span class="o">}</span>: commit: <span class="m">20210908</span>
+565c180 HEAD@<span class="o">{</span>9<span class="o">}</span>: commit: <span class="m">20210908</span>
+13524b9 HEAD@<span class="o">{</span>10<span class="o">}</span>: commit: <span class="m">20210908</span>
+84660b4 HEAD@<span class="o">{</span>11<span class="o">}</span>: initial pull
+</code></pre></td></tr></table>
+</div>
+</div><p>找到之前提交的commit 信息， 使用 git reset –hard xxxx 恢复到指定的commit或者使用 git checkout  也可以切换到之前的commit提交</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># git reset –hard xxxx</span>
 </code></pre></td></tr></table>
 </div>
 </div>
