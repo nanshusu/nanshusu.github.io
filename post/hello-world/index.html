@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.88.1 with theme even" />
+<meta name="generator" content="Hugo 0.93.1 with theme even" />
 
 
 <link rel="canonical" href="https://nanshusu.github.io/post/hello-world/" />
@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Hello World">
 <meta itemprop="description" content="Welcome to Hugo! This is your very first post. Check documentation for more info. 快速开始 生成站点 使用Hugo快速生成站点，比如希望生成到/path/to/site路径： 1 $ hugo new site /path/to/site 安装皮肤 挑选">
 
-<meta itemprop="wordCount" content="677">
+<meta itemprop="wordCount" content="810">
 <meta itemprop="keywords" content="Hugo,计算机," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Hello World"/>
 <meta name="twitter:description" content="Welcome to Hugo! This is your very first post. Check documentation for more info. 快速开始 生成站点 使用Hugo快速生成站点，比如希望生成到/path/to/site路径： 1 $ hugo new site /path/to/site 安装皮肤 挑选"/>
@@ -147,6 +147,11 @@
             <li><a href="#部署">部署</a></li>
           </ul>
         </li>
+        <li><a href="#问题">问题</a>
+          <ul>
+            <li><a href="#q1-多行数学公式">Q1 多行数学公式</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -163,8 +168,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ hugo new site /path/to/site
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ hugo new site /path/to/site
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="安装皮肤">安装皮肤</h3>
 <p>挑选一个心仪的皮肤，下载到themes目录下</p>
@@ -173,8 +178,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ git clone https://github.com/olOwOlo/hugo-theme-even themes/even   //注意路径
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git clone https://github.com/olOwOlo/hugo-theme-even themes/even   //注意路径
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="调整配置">调整配置</h3>
 <p>Hugo配置文件放置在源文件下，并且支持三种格式：toml，yaml，yml。这个配置文件可以直接从主题文件中的exampleSite里copy到博客文件夹下，然后进行修改。<br>
@@ -202,25 +207,25 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">baseURL</span> <span class="o">=</span> <span class="s2">&#34;https://nanshusu.github.io/&#34;</span>
-<span class="nv">languageCode</span> <span class="o">=</span> <span class="s2">&#34;zh-cn&#34;</span>
-<span class="nv">defaultContentLanguage</span> <span class="o">=</span> <span class="s2">&#34;zh-cn&#34;</span>                          <span class="c1"># en / zh-cn / ... (This field determines which i18n file to use)</span>
-<span class="nv">title</span> <span class="o">=</span> <span class="s2">&#34;Nanshu&#39;s blog&#34;</span>
-... ...
-<span class="nv">paginate</span> <span class="o">=</span> <span class="m">10</span>                                             <span class="c1"># 首页每页显示的文章数</span>
-... ...
-<span class="o">[</span>author<span class="o">]</span>                  <span class="c1"># essential                     # 必需</span>
-  <span class="nv">name</span> <span class="o">=</span> <span class="s2">&#34;nanshusu&#34;</span>
-... ...
-  <span class="c1"># site info (optional)                                  # 站点信息（可选，不需要的可以直接注释掉）</span>
-  <span class="nv">logoTitle</span> <span class="o">=</span> <span class="s2">&#34;Nanshu&#34;</span>        <span class="c1"># default: the title value  # 默认值: 上面设置的title值</span>
-  <span class="nv">keywords</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&#34;Hugo&#34;</span>, <span class="s2">&#34;theme&#34;</span>,<span class="s2">&#34;even&#34;</span><span class="o">]</span>
-  <span class="nv">description</span> <span class="o">=</span> <span class="s2">&#34;Nanshu&#39;s blog.&#34;</span>
-... ...
-  <span class="o">[</span>markup.goldmark.renderer<span class="o">]</span>
-    <span class="nv">hardWraps</span> <span class="o">=</span> <span class="nb">true</span>   	<span class="c1"># 新增项，用于markdown转html时使用硬换行，否则使用两个连续空格标识换行</span>
-    <span class="nv">unsafe</span> <span class="o">=</span> <span class="nb">true</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">baseURL</span> <span class="o">=</span> <span class="s2">&#34;https://nanshusu.github.io/&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">languageCode</span> <span class="o">=</span> <span class="s2">&#34;zh-cn&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">defaultContentLanguage</span> <span class="o">=</span> <span class="s2">&#34;zh-cn&#34;</span>                          <span class="c1"># en / zh-cn / ... (This field determines which i18n file to use)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">title</span> <span class="o">=</span> <span class="s2">&#34;Nanshu&#39;s blog&#34;</span>
+</span></span><span class="line"><span class="cl">... ...
+</span></span><span class="line"><span class="cl"><span class="nv">paginate</span> <span class="o">=</span> <span class="m">10</span>                                             <span class="c1"># 首页每页显示的文章数</span>
+</span></span><span class="line"><span class="cl">... ...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>author<span class="o">]</span>                  <span class="c1"># essential                     # 必需</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">name</span> <span class="o">=</span> <span class="s2">&#34;nanshusu&#34;</span>
+</span></span><span class="line"><span class="cl">... ...
+</span></span><span class="line"><span class="cl">  <span class="c1"># site info (optional)                                  # 站点信息（可选，不需要的可以直接注释掉）</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">logoTitle</span> <span class="o">=</span> <span class="s2">&#34;Nanshu&#34;</span>        <span class="c1"># default: the title value  # 默认值: 上面设置的title值</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">keywords</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&#34;Hugo&#34;</span>, <span class="s2">&#34;theme&#34;</span>,<span class="s2">&#34;even&#34;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">description</span> <span class="o">=</span> <span class="s2">&#34;Nanshu&#39;s blog.&#34;</span>
+</span></span><span class="line"><span class="cl">... ...
+</span></span><span class="line"><span class="cl">  <span class="o">[</span>markup.goldmark.renderer<span class="o">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">hardWraps</span> <span class="o">=</span> <span class="nb">true</span>   	<span class="c1"># 新增项，用于markdown转html时使用硬换行，否则使用两个连续空格标识换行</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">unsafe</span> <span class="o">=</span> <span class="nb">true</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="创建新文章">创建新文章</h3>
 <p>会放到post目录，方便之后生成聚合页面。</p>
@@ -229,8 +234,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ hugo new post/first.md
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ hugo new post/first.md
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="运行hugo">运行Hugo</h3>
 <p>在你的站点根目录执行Hugo命令进行调试：</p>
@@ -239,8 +244,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ hugo server -D
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ hugo server -D
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>浏览器里打开： http://localhost:1313</p>
 <h3 id="部署">部署</h3>
@@ -250,8 +255,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ hugo -D<span class="s2">&#34;
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ hugo -D<span class="s2">&#34;
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果一切顺利，所有静态页面都会生成到public目录，将pubilc目录里所有文件push到git服务器对应分支上。</p>
 <div class="highlight"><div class="chroma">
@@ -266,17 +271,56 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nb">cd</span> public
-$ git init
-$ git branch -M hugo    //hugo是分支名，根据实际情况填写，下同
-$ git remote add origin git@github.com:nanshusu/nanshusu.github.io.git
-$ git pull origin hugo  //首次先从github同步数据，后续不需要
-$ git add -A
-$ git commit -m <span class="s2">&#34;some commit&#34;</span>
-$ git push -u origin hugo
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">cd</span> public
+</span></span><span class="line"><span class="cl">$ git init
+</span></span><span class="line"><span class="cl">$ git branch -M hugo    //hugo是分支名，根据实际情况填写，下同
+</span></span><span class="line"><span class="cl">$ git remote add origin git@github.com:nanshusu/nanshusu.github.io.git
+</span></span><span class="line"><span class="cl">$ git pull origin hugo  //首次先从github同步数据，后续不需要
+</span></span><span class="line"><span class="cl">$ git add -A
+</span></span><span class="line"><span class="cl">$ git commit -m <span class="s2">&#34;some commit&#34;</span>
+</span></span><span class="line"><span class="cl">$ git push -u origin hugo
+</span></span></code></pre></td></tr></table>
 </div>
+</div><h2 id="问题">问题</h2>
+<h3 id="q1-多行数学公式">Q1 多行数学公式</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">\begin{equation}\begin{split} a&amp;=b+c-d\\
+</span></span><span class="line"><span class="cl">&amp;\quad +e-f\\
+</span></span><span class="line"><span class="cl">&amp;=g+h\\
+</span></span><span class="line"><span class="cl">&amp;=i
+</span></span><span class="line"><span class="cl">\end{split}\end{equation}
+</span></span></code></pre></td></tr></table>
 </div>
+</div><p>其中：<br>
+⒈ begin 和 end 表示公式的起始<br>
+⒉ \ 表示换行<br>
+⒊ &amp; 表示对齐<br>
+结果渲染到HTML后显示为：<br>
+$$<br>
+\begin{equation}\begin{split} a&amp;=b+c-d\<br>
+&amp;\quad +e-f\<br>
+&amp;=g+h\<br>
+&amp;=i<br>
+\end{split}\end{equation}<br>
+$$<br>
+没有了换行。<br>
+这里双反斜杠\被转义成单反斜杠\了，因此将需要换行的地方由双反斜杠\改成4反斜杠\\，就可以了：<br>
+$$<br>
+\begin{equation}\begin{split} a&amp;=b+c-d\\<br>
+&amp;\quad +e-f\\<br>
+&amp;=g+h\\<br>
+&amp;=i<br>
+\end{split}\end{equation}<br>
+$$</p>
+
     </div>
 
     <div class="post-copyright">
@@ -341,7 +385,7 @@ $ git push -u origin hugo
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>nanshusu</span>
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>nanshusu</span>
   </span>
 </div>
 
@@ -358,7 +402,7 @@ $ git push -u origin hugo
 
 
 
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+<script type="text/javascript" src="/js/main.min.64437849d125a2d603b3e71d6de5225d641a32d17168a58106e0b61852079683.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex: {

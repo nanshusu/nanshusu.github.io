@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.88.1 with theme even" />
+<meta name="generator" content="Hugo 0.93.1 with theme even" />
 
 
 <link rel="canonical" href="https://nanshusu.github.io/post/kms%E6%BF%80%E6%B4%BB/" />
@@ -171,8 +171,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># scp ./vlmcsd-x64-musl-static xxx@host.ip:/opt/kms/</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># scp ./vlmcsd-x64-musl-static xxx@host.ip:/opt/kms/</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>#远端</p>
 <div class="highlight"><div class="chroma">
@@ -180,8 +180,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># chmod u+x /opt/kms/vlmcsd-x64-musl-static</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># chmod u+x /opt/kms/vlmcsd-x64-musl-static</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>3）运行vlmcsd并开启端口</p>
 <div class="highlight"><div class="chroma">
@@ -189,8 +189,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># ./vlmcsd-x64-musl-static 	#如果没有报错，就运行成功了，如果报错，检查端口占用</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># ./vlmcsd-x64-musl-static 	#如果没有报错，就运行成功了，如果报错，检查端口占用</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>#centos开启端口对外访问</p>
 <div class="highlight"><div class="chroma">
@@ -199,9 +199,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># firewall-cmd --zone=public --add-port=1688/tcp --permanent </span>
-<span class="c1"># firewall-cmd reload</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># firewall-cmd --zone=public --add-port=1688/tcp --permanent </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># firewall-cmd reload</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>4）本地端口连通性测试<br>
 telnet you.host.ip port 	#如果能够连通，就可以进行下一步</p>
@@ -216,11 +216,11 @@ telnet you.host.ip port 	#如果能够连通，就可以进行下一步</p>
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd">slmgr /upk 				#是用于卸载当前电脑的密钥
-slmgr /ipk M7XTQ-FN8P6-TTKYV-9D4CC-J462D	#安装、替换现有的产品密钥。
-slmgr /skms 192.168.1.1			#设置KMS主机名。一般为IP地址
-slmgr /ato                                    	#激活
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">slmgr /upk 				#是用于卸载当前电脑的密钥
+</span></span><span class="line"><span class="cl">slmgr /ipk M7XTQ-FN8P6-TTKYV-9D4CC-J462D	#安装、替换现有的产品密钥。
+</span></span><span class="line"><span class="cl">slmgr /skms 192.168.1.1			#设置KMS主机名。一般为IP地址
+</span></span><span class="line"><span class="cl">slmgr /ato                                    	#激活
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>清除KMS信息</p>
 <div class="highlight"><div class="chroma">
@@ -230,10 +230,10 @@ slmgr /ato                                    	#激活
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd">slmgr /upk
-slmgr /ckms
-slmgr /rearm
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">slmgr /upk
+</span></span><span class="line"><span class="cl">slmgr /ckms
+</span></span><span class="line"><span class="cl">slmgr /rearm
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>重启之后按下win+R打开运行，键入：services.msc 点击确定打开服务；<br>
 打开服务后找到Software Protection服务，然后按鼠标右键弹出菜单中点击启动命令可清除完成！</p>
@@ -244,8 +244,8 @@ slmgr /rearm
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd">./vlmcs-Windows-x64.exe -v -l 3 you.host.ip
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">./vlmcs-Windows-x64.exe -v -l 3 you.host.ip
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>#-v输出详细信息<br>
 #-l 3表示发送Windows 10 Enterprise 2016 LTSB的激活请求，具体版本对应列表可以通过./vlmcs-Windows-x64.exe -x查看</p>
@@ -258,11 +258,11 @@ slmgr /rearm
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd">C<span class="p">:</span><span class="nl">\Users\xxxx</span>
-λ wmic os get caption
-Caption
-Microsoft Windows 10 企业版 LTSC
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">C<span class="p">:</span><span class="nl">\Users\xxxx</span>
+</span></span><span class="line"><span class="cl">λ wmic os get caption
+</span></span><span class="line"><span class="cl">Caption
+</span></span><span class="line"><span class="cl">Microsoft Windows 10 企业版 LTSC
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="激活office">激活office</h1>
 <p>注意只能激活VOL版，如果不是需要转换成VOL版再激活(可以使用附件进行转化)</p>
@@ -278,15 +278,15 @@ Microsoft Windows 10 企业版 LTSC
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="k">cd</span> <span class="s2">&#34;C:\Program Files\Microsoft Office\Office16&#34;</span>		#进入office安装目录
-cscript ospp.vbs /unpkey:xxxxx	#卸载已安装的产品密钥。后面的数字是密钥的最后5位数
-cscript ospp.vbs /inpkey:XQNVK-8JYDB-WJ9W3-YJ8YR-WFG99	#替换VOL的密钥
-cscript ospp.vbs /inpkey:PD3PC-RHNGV-FXJ29-8JK7D-RJRJK
-cscript ospp.vbs /sethst:you-kms-server	#注册kms服务器地址
-cscript ospp.vbs /act	#执行激活
-cscript ospp.vbs /dstatus	#显示当前已安装产品密钥的许可证信息。可以查看到自已安裝的版本有多少个序列号。
-cscript ospp.vbs /remhst	#删除KMS主机名。
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl"><span class="k">cd</span> <span class="s2">&#34;C:\Program Files\Microsoft Office\Office16&#34;</span>		#进入office安装目录
+</span></span><span class="line"><span class="cl">cscript ospp.vbs /unpkey:xxxxx	#卸载已安装的产品密钥。后面的数字是密钥的最后5位数
+</span></span><span class="line"><span class="cl">cscript ospp.vbs /inpkey:XQNVK-8JYDB-WJ9W3-YJ8YR-WFG99	#替换VOL的密钥
+</span></span><span class="line"><span class="cl">cscript ospp.vbs /inpkey:PD3PC-RHNGV-FXJ29-8JK7D-RJRJK
+</span></span><span class="line"><span class="cl">cscript ospp.vbs /sethst:you-kms-server	#注册kms服务器地址
+</span></span><span class="line"><span class="cl">cscript ospp.vbs /act	#执行激活
+</span></span><span class="line"><span class="cl">cscript ospp.vbs /dstatus	#显示当前已安装产品密钥的许可证信息。可以查看到自已安裝的版本有多少个序列号。
+</span></span><span class="line"><span class="cl">cscript ospp.vbs /remhst	#删除KMS主机名。
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="序列号">序列号</h1>
 <p>WIN10专业版：W269N-WFGWX-YVC9B-4J6C9-T83GX<br>
@@ -391,7 +391,7 @@ RTM版的程序码和正式版一样。但是和正式版也有不一样的地�
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>nanshusu</span>
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>nanshusu</span>
   </span>
 </div>
 
@@ -408,7 +408,7 @@ RTM版的程序码和正式版一样。但是和正式版也有不一样的地�
 
 
 
-<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+<script type="text/javascript" src="/js/main.min.64437849d125a2d603b3e71d6de5225d641a32d17168a58106e0b61852079683.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex: {
