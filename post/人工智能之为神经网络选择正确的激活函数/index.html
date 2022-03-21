@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>为神经网络选择正确的激活函数 - Nanshu&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="nanshusu" /><meta name="description" content="转载自https://mp.weixin.qq.com/s/5w43oMo0m8NWEivDf_FcJg 前言 我们都知道神经网络模型中使用激活" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.93.1 with theme even" />
+
+
+<link rel="canonical" href="https://nanshusu.github.io/post/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%B9%8B%E4%B8%BA%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E9%80%89%E6%8B%A9%E6%AD%A3%E7%A1%AE%E7%9A%84%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="为神经网络选择正确的激活函数" />
+<meta property="og:description" content="转载自https://mp.weixin.qq.com/s/5w43oMo0m8NWEivDf_FcJg 前言 我们都知道神经网络模型中使用激活" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nanshusu.github.io/post/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%B9%8B%E4%B8%BA%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E9%80%89%E6%8B%A9%E6%AD%A3%E7%A1%AE%E7%9A%84%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-09-07T15:58:08+08:00" />
+<meta property="article:modified_time" content="2021-09-07T15:58:08+08:00" />
+
+<meta itemprop="name" content="为神经网络选择正确的激活函数">
+<meta itemprop="description" content="转载自https://mp.weixin.qq.com/s/5w43oMo0m8NWEivDf_FcJg 前言 我们都知道神经网络模型中使用激活"><meta itemprop="datePublished" content="2021-09-07T15:58:08+08:00" />
+<meta itemprop="dateModified" content="2021-09-07T15:58:08+08:00" />
+<meta itemprop="wordCount" content="3545">
+<meta itemprop="keywords" content="人工智能,人工神经网络," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="为神经网络选择正确的激活函数"/>
+<meta name="twitter:description" content="转载自https://mp.weixin.qq.com/s/5w43oMo0m8NWEivDf_FcJg 前言 我们都知道神经网络模型中使用激活"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Nanshu</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Nanshu</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">为神经网络选择正确的激活函数</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-09-07 </span>
+        <div class="post-category">
+            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"> 计算机 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#神经网络中不同层的激活函数">神经网络中不同层的激活函数</a></li>
+    <li><a href="#线性与非线性函数">线性与非线性函数</a></li>
+    <li><a href="#不同类型的激活函数">不同类型的激活函数</a>
+      <ul>
+        <li><a href="#sigmoid">Sigmoid</a></li>
+        <li><a href="#tanh">Tanh</a></li>
+        <li><a href="#relu">RELU</a></li>
+        <li><a href="#leaky-relu">Leaky ReLU</a></li>
+        <li><a href="#参数-relu-prelu-激活函数">参数 ReLU (PReLU) 激活函数</a></li>
+        <li><a href="#relu6">Relu6</a></li>
+        <li><a href="#softmax">SoftMax</a></li>
+        <li><a href="#二元阶梯激活函数">二元阶梯激活函数</a></li>
+        <li><a href="#恒等激活函数">恒等激活函数</a></li>
+        <li><a href="#swish">Swish</a></li>
+        <li><a href="#h-swish">H-Swish</a></li>
+      </ul>
+    </li>
+    <li><a href="#最后总结">最后总结</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>转载自<a href="https://mp.weixin.qq.com/s/5w43oMo0m8NWEivDf_FcJg">https://mp.weixin.qq.com/s/5w43oMo0m8NWEivDf_FcJg</a></p>
+<h1 id="前言">前言</h1>
+<p>我们都知道神经网络模型中使用激活函数的主要目的是将非线性特性引入到我们的网络中，强化网络的学习能力。激活函数应用于隐藏层和输出层中每个节点的称为 z 的输入加权和（此处输入可以是原始数据或前一层的输出）。<br>
+在本篇文章中我们将讨论神经网络中常见的激活函数，并使用可视化技术帮助你了解激活函数的函数定义和不同的使用场景。<br>
+在看完本文章后，你可以将清楚地了解何时使用哪种激活函数，并了解不同激活函数的定义。<br>
+<img src="01.png" alt="图1"></p>
+<h1 id="神经网络中不同层的激活函数">神经网络中不同层的激活函数</h1>
+<p>神经网络通常由三种类型的层组成：输入层、隐藏层和输出层。<br>
+输入层只保存输入数据，不执行任何计算。因此不需要使用激活函数。<br>
+在神经网络的隐藏层中需要使用非线性激活函数， 这是因为<strong>需要在网络中引入<font color=Blue>非线性</font>来学习复杂的模式</strong>。如果没有非线性激活函数，具有许多隐藏层的神经网络将成为一个巨大的线性回归模型，这对于从现实世界数据中学习复杂模式毫无用处。根据我们在隐藏层中使用的激活函数的类型，神经网络模型的性能会有很大差异。<br>
+在神经网络的输出层内使用激活函数的选择取决于我们要解决的问题类型。</p>
+<h1 id="线性与非线性函数">线性与非线性函数</h1>
+<p>大多数激活函数是非线性的。但是有时也在神经网络中使用线性激活函数，例如在解决回归问题的神经网络模型的输出层中使用线性激活函数。<br>
+一个线性函数（称为 f）接受输入 z 并返回输出 cz，它是输入乘以常数 c。在数学上，这可以表示为 f(z) = cz。当 c=1 时，函数按原样返回输入，并且不对输入进行任何更改。二维空间中线性函数的图形是一条直线。<br>
+任何不是线性的函数都可以归类为非线性函数。非线性函数的图形不是一条直线。它可以是一个复杂的模式，也可以是两个或多个线性组件的组合。</p>
+<h1 id="不同类型的激活函数">不同类型的激活函数</h1>
+<p>下面将讨论神经网络中常用的激活函数。</p>
+<h2 id="sigmoid">Sigmoid</h2>
+<p><img src="02.png" alt="图2"><br>
+主要特点：</p>
+<ul>
+<li>也是逻辑回归模型中使用的逻辑函数。</li>
+<li>sigmoid 函数是一个 s 形图。</li>
+<li>这是一个非线性函数。</li>
+<li>sigmoid 函数将其输入转换为 0 到 1 之间的概率值。</li>
+<li>它将大的负值转换为 0，将大的正值转换为 1。</li>
+<li>对于输入 0，它返回 0.5。所以 0.5 被称为阈值，它可以决定给定的输入属于什么类型的两个类。</li>
+</ul>
+<p>用法：</p>
+<ul>
+<li>早期，Sigmoid 函数被用作 MLP、CNN 和 RNN 中隐藏层的激活函数。</li>
+<li>现在，sigmoid 函数仍在 RNN 中使用。</li>
+<li>我们通常不将 sigmoid 函数用于 MLP 和 CNN 中的隐藏层，因为太慢了，我们在那里使用 ReLU 或 Leaky ReLU。</li>
+<li>当我们构建二进制分类器时，输出层必须使用 sigmoid 函数，其中输出被解释为类标签，具体取决于函数返回的输入的概率值。<br>
+<img src="03.png" alt="图3"></li>
+</ul>
+<p>当我们使用 sigmoid 函数建立一个多标签分类模型时，其中每个相互包含的类都有两个结果。不要将此与多类分类模型混淆。<br>
+<img src="04.png" alt="图4"><br>
+由于以下缺点，我们通常不在隐藏层中使用 sigmoid 函数。</p>
+<ul>
+<li>sigmoid 函数存在梯度消失问题。这也称为梯度饱和。</li>
+<li>sigmoid 函数收敛慢。</li>
+<li>它的输出不是以零为中心的。因此，它使优化过程更加困难。</li>
+<li>由于包含了 e^z 项，因此该函数的计算成本很高。</li>
+</ul>
+<h2 id="tanh">Tanh</h2>
+<p><img src="05.png" alt="图5"><br>
+主要特点：</p>
+<ul>
+<li>tanh（正切双曲线）函数的输出始终介于 -1 和 +1 之间。</li>
+<li>像 sigmoid 函数一样，它有一个 s 形图。这也是一个非线性函数。</li>
+<li>与 sigmoid 函数相比，使用 tanh 函数的一个优点是 tanh 函数以零为中心。这使得优化过程更加容易。</li>
+<li>tanh 函数的梯度比 sigmoid 函数的梯度更陡。</li>
+</ul>
+<p>用法：</p>
+<ul>
+<li>目前tanh 函数还被用作 MLP、CNN 和 RNN 中隐藏层的激活函数。</li>
+<li>tanh 函数也在 RNN 中使用。</li>
+<li>我们通常不将 tanh 函数用于 MLP 和 CNN 中的隐藏层。</li>
+<li>我们从不在输出层使用 tanh 函数。</li>
+</ul>
+<p>由于以下缺点，我们通常不在隐藏层中使用 tanh 函数。</p>
+<ul>
+<li>tanh 函数存在梯度消失问题。</li>
+<li>由于包含了 e^z 项，因此该函数的计算成本很高。</li>
+</ul>
+<h2 id="relu">RELU</h2>
+<p><img src="06.png" alt="图6"><br>
+主要特点：</p>
+<ul>
+<li>ReLU（整流线性单元）激活函数是 sigmoid 和 tanh 激活函数的绝佳替代品。</li>
+<li>ReLU 发明是深度学习领域最重要的突破之一。</li>
+<li>不存在梯度消失问题。</li>
+<li>计算成本很低。认为 ReLU 的收敛速度比 sigmoid 和 tanh 函数快 6 倍。</li>
+<li>如果输入值为 0 或大于 0，则 ReLU 函数按原样输出输入。如果输入小于 0，则 ReLU 函数输出值 0。</li>
+<li>ReLU 函数由两个线性分量组成。因此，ReLU 函数是一个分段线性函数。所以ReLU 函数是一个非线性函数。</li>
+<li>ReLU 函数的输出范围可以从 0 到正无穷大。</li>
+<li>收敛速度比 sigmoid 和 tanh 函数快。这是因为 ReLU 函数对一个线性分量具有固定导数（斜率），而对另一个线性分量具有零导数。因此，使用 ReLU 函数的学习过程要快得多。</li>
+<li>使用 ReLU 可以更快地执行计算，因为函数中不包含指数项。</li>
+</ul>
+<p>用法：</p>
+<ul>
+<li>ReLU 函数是MLP 和 CNN 神经网络模型中隐藏层的默认激活函数。</li>
+<li>我们通常不会在 RNN 模型的隐藏层中使用 ReLU 函数。相反，我们在那里使用 sigmoid 或 tanh 函数。</li>
+<li>我们从不在输出层使用 ReLU 函数。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>使用 ReLU 函数的主要缺点是它有一个dying ReLU问题。（当梯度值过大时，权重更新后为负数，经relu后变为0，导致后面也不再更新）</li>
+</ul>
+<h2 id="leaky-relu">Leaky ReLU</h2>
+<p><img src="07.png" alt="图7"><br>
+主要特点：</p>
+<ul>
+<li>leaky ReLU 激活函数是默认 ReLU 函数的修改版本。</li>
+<li>与 ReLU 激活函数一样，该函数不存在梯度消失问题。</li>
+<li>如果输入值是 0 大于 0，leaky ReLU 函数会像默认的 ReLU 函数一样输出输入。但是如果输入小于 0，leaky ReLU 函数会输出一个由 αz 定义的小负值（其中 α 是一个小的常数值，通常为 0.01，z 是输入值）。</li>
+<li>它没有任何具有零导数（斜率）的线性分量。因此它可以避免dying ReLU 问题。</li>
+<li>使用leaky ReLU 的学习过程比默认的 ReLU 更快。</li>
+</ul>
+<p>用法：</p>
+<ul>
+<li>ReLU 函数的相同用法也适用于leaky ReLU 函数。</li>
+</ul>
+<h2 id="参数-relu-prelu-激活函数">参数 ReLU (PReLU) 激活函数</h2>
+<p>主要特点：</p>
+<ul>
+<li>这是 ReLU 函数的另一个变体。</li>
+<li>这几乎类似于leaky ReLU 函数。唯一的区别是值 α 成为可学习的参数（因此得名）。我们将 α 设置为网络中每个神经元的参数。因此，α的最优值从网络中学习。</li>
+</ul>
+<h2 id="relu6">Relu6</h2>
+<p><img src="08.png" alt="图8"><br>
+主要特点：</p>
+<ul>
+<li>ReLU 和 ReLU6 之间的主要区别在于，ReLU 允许正侧的值非常高，而 ReLU6 限制为正侧的值 6。任何 6 或大于 6 的输入值都将被限制为值 6（因此得名）。</li>
+<li>ReLU6 函数由三个线性分量组成。它是一个非线性函数。</li>
+</ul>
+<h2 id="softmax">SoftMax</h2>
+<p><img src="09.png" alt="图9"><br>
+主要特点：</p>
+<ul>
+<li>这也是一个非线性激活函数。</li>
+<li>softmax 函数计算一个事件（类）在 K 个不同事件（类）上的概率值。它计算每个类别的概率值。所有概率的总和为 1，这意味着所有事件（类）都是互斥的。</li>
+</ul>
+<p>用法：</p>
+<ul>
+<li>必须在多类分类问题的输出层使用 softmax 函数。</li>
+<li>不在隐藏层中使用 softmax 函数。<br>
+<img src="10.png" alt="图10"></li>
+</ul>
+<h2 id="二元阶梯激活函数">二元阶梯激活函数</h2>
+<p><img src="11.png" alt="图11"><br>
+主要特点：</p>
+<ul>
+<li>该函数也称为阈值激活函数。我们可以将任何值设置为阈值，在这里我们指定值 0。</li>
+<li>如果输入大于阈值，此函数输出值 1。如果输入等于或小于阈值，此函数输出值 0。</li>
+<li>这函数输出一个二进制值，0 或 1。</li>
+<li>函数由两个线性分量组成。因此该函数是分段线性函数。所以二元阶跃函数是非线性函数，并且不是平滑函数。</li>
+</ul>
+<p>用法：</p>
+<ul>
+<li>通常不会在现代神经网络模型中使用这个函数。</li>
+<li>但是可以使用这个函数来解释诸如“激发神经元”、“感知器的内部工作”等理论概念。因此，阶跃函数在理论上很重要。</li>
+</ul>
+<h2 id="恒等激活函数">恒等激活函数</h2>
+<p><img src="12.png" alt="图12"><br>
+主要特点:</p>
+<ul>
+<li>这也被称为线性激活函数。</li>
+<li>当我们讨论激活函数时，这是唯一一个被认为是线性函数的函数。</li>
+<li>这个函数按原样输出输入值。对输入不做任何更改。</li>
+</ul>
+<p>用法:</p>
+<ul>
+<li>该函数仅用于解决回归问题的神经网络模型的输出层。</li>
+<li>不要在隐藏层中使用这个函数。<br>
+<img src="13.png" alt="图13"></li>
+</ul>
+<h2 id="swish">Swish</h2>
+<p><img src="14.png" alt="图14"><br>
+主要特点：</p>
+<ul>
+<li>该函数是通过将 sigmoid 函数乘以输入 z 构成的。</li>
+<li>这是一个非线性函数。</li>
+<li>该图与 ReLU 激活函数的图非常相似。</li>
+<li>曲线比 ReLU 激活函数更平滑。在训练模型时，这种平滑度很重要。该函数在训练时很容易收敛。</li>
+</ul>
+<p>用法：</p>
+<ul>
+<li>仅在隐藏层中使用。</li>
+<li>不在神经网络模型的输出层使用这个函数。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>Swish 函数的主要缺点是计算量很大，因为函数中包含了 e^z 项。这可以通过使用下面定义的称为“Hard Swish”的特殊函数来避免。</li>
+</ul>
+<h2 id="h-swish">H-Swish</h2>
+<p><img src="15.png" alt="图15"><br>
+主要特点：</p>
+<ul>
+<li>与 Swish 函数的曲线基本相同。这在计算上很便宜，因为 sigmoid 函数被线性模拟取代。</li>
+</ul>
+<p>用法：</p>
+<ul>
+<li>H-Swish的用法类似于 Swish 激活函数的用法。</li>
+</ul>
+<h1 id="最后总结">最后总结</h1>
+<p>激活函数只是数学函数。激活函数应该具有的主要特征是该函数是可微的，因为这是模型中反向传播的要求。<br>
+选择正确的激活函数可以被认为是一种超参数调整，通过理解问题定义并考虑模型的性能和损失函数的收敛性来手动选择激活函数。这里总结了上面讨论的不同激活函数的使用场景。当训练神经网络模型时，可以作为参考：</p>
+<ul>
+<li>神经网络的输入层节点不需要激活函数，在定义输入层时无需担心激活函数。</li>
+<li>输出层激活函数取决于我们要解决的问题类型。在回归问题中，我们使用线性（恒等）激活函数。在二元分类器中，我们使用 sigmoid 激活函数。在多类分类问题中，我们使用 softmax 激活函数。在多标签分类问题中，我们使用 sigmoid 激活函数，为每个类输出一个概率值。</li>
+<li>隐藏层中使用非线性激活函数，通过考虑模型的性能或损失函数的收敛性来做出选择。可以从 ReLU 激活函数开始，如果你有一个Dying ReLU 问题，试试leaky ReLU。</li>
+<li>在 MLP 和 CNN 神经网络模型中，ReLU 是隐藏层的默认激活函数。</li>
+<li>在 RNN 神经网络模型中，我们对隐藏层使用 sigmoid 或 tanh 函数。tanh 函数具有更好的性能。</li>
+<li>只有恒等激活函数被认为是线性的。所有其他激活函数都是非线性的。</li>
+<li>不要在隐藏层中使用 softmax 和恒等函数，在隐藏层中使用 tanh、ReLU、ReLU 的变体、swish 和 hard swish 函数。hard swish是最新的研究结果，可以试试</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">nanshusu</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-09-07
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a>
+          <a href="/tags/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">人工神经网络</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%B9%8B%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%83%8C%E5%90%8E%E7%9A%84%E6%95%B0%E5%AD%A6%E5%8E%9F%E7%90%86/">
+            <span class="next-text nav-default">人工神经网络背后的数学原理</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:nanshusu@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/nanshusu" class="iconfont icon-github" title="github"></a>
+  <a href="https://nanshusu.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>nanshusu</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.64437849d125a2d603b3e71d6de5225d641a32d17168a58106e0b61852079683.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        tags: 'ams',
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
