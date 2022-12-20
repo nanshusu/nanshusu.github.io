@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>WLAN on Nanshu&#39;s blog</title>
+    <link>https://nanshusu.github.io/tags/wlan/</link>
+    <description>Recent content in WLAN on Nanshu&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 26 Aug 2021 18:40:22 +0000</lastBuildDate><atom:link href="https://nanshusu.github.io/tags/wlan/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>无线WIFI基础</title>
+      <link>https://nanshusu.github.io/post/%E6%97%A0%E7%BA%BFwifi/</link>
+      <pubDate>Thu, 26 Aug 2021 18:40:22 +0000</pubDate>
+      
+      <guid>https://nanshusu.github.io/post/%E6%97%A0%E7%BA%BFwifi/</guid>
+      <description>什么是 CSMA/CA ？ 以太网用CSMA/CD进行传输控制，而 IEEE 802.11 的 WLAN 采用的是CSMA/CA。 CSMA/CD，全称 Carrier Sense Multiple Access with Collision Detection ，即 载波侦听多路访问/冲突</description>
+    </item>
+    
+  </channel>
+</rss>

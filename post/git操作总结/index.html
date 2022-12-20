@@ -49,7 +49,7 @@
 <meta itemprop="name" content="git操作总结">
 <meta itemprop="description" content="准备 任何人在使用git之前，都要提交简单的个人信息，以便git区分不同的提交者身份。 1 2 # git config –global user.name &#34;your name&#34; # git config –global user.email yourname@example.com 创"><meta itemprop="datePublished" content="2021-08-26T18:40:22+00:00" />
 <meta itemprop="dateModified" content="2021-08-26T18:40:22+00:00" />
-<meta itemprop="wordCount" content="2068">
+<meta itemprop="wordCount" content="2119">
 <meta itemprop="keywords" content="git,计算机," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="git操作总结"/>
 <meta name="twitter:description" content="准备 任何人在使用git之前，都要提交简单的个人信息，以便git区分不同的提交者身份。 1 2 # git config –global user.name &#34;your name&#34; # git config –global user.email yourname@example.com 创"/>
@@ -147,6 +147,7 @@
     <li><a href="#检查修改">检查修改</a></li>
     <li><a href="#替换本地改动">替换本地改动</a></li>
     <li><a href="#误操作导致本地修改丢失的恢复">误操作导致本地修改丢失的恢复</a></li>
+    <li><a href="#查看远程仓库地址">查看远程仓库地址</a></li>
   </ul>
 </nav>
   </div>
@@ -460,7 +461,7 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># git reflog</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># git reflog 		//该命令可以查看你每次执行的操作记录，以及版本变化的记录。</span>
 </span></span><span class="line"><span class="cl">99e0e21 <span class="o">(</span>HEAD -&gt; hugo, origin/hugo<span class="o">)</span> HEAD@<span class="o">{</span>0<span class="o">}</span>: pull --no-rebase: Merge made by the <span class="s1">&#39;ort&#39;</span> strategy.
 </span></span><span class="line"><span class="cl">6af73cd HEAD@<span class="o">{</span>1<span class="o">}</span>: reset: moving to 6af73cd
 </span></span><span class="line"><span class="cl">4c8efed HEAD@<span class="o">{</span>2<span class="o">}</span>: reset: moving to HEAD
@@ -482,6 +483,19 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># git reset –hard xxxx</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="查看远程仓库地址">查看远程仓库地址</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># git remote -v</span>
+</span></span><span class="line"><span class="cl">origin  git@github.com:nanshusu/nanshusu.github.cn.git <span class="o">(</span>fetch<span class="o">)</span>
+</span></span><span class="line"><span class="cl">origin  git@github.com:nanshusu/nanshusu.github.cn.git <span class="o">(</span>push<span class="o">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div>

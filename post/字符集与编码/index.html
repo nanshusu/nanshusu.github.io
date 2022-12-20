@@ -49,7 +49,7 @@
 <meta itemprop="name" content="字符集与编码">
 <meta itemprop="description" content="我们都知道计算机是不能直接存储字母，数字，图片，符号等，计算机能处理和工作的唯一单位是”比特位（bit）”，一个比特位通常只有 0 和 1，是（y"><meta itemprop="datePublished" content="2021-09-07T15:58:08+08:00" />
 <meta itemprop="dateModified" content="2021-09-07T15:58:08+08:00" />
-<meta itemprop="wordCount" content="1705">
+<meta itemprop="wordCount" content="2690">
 <meta itemprop="keywords" content="字符集,编码," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="字符集与编码"/>
 <meta name="twitter:description" content="我们都知道计算机是不能直接存储字母，数字，图片，符号等，计算机能处理和工作的唯一单位是”比特位（bit）”，一个比特位通常只有 0 和 1，是（y"/>
@@ -142,7 +142,7 @@
 1、没有一种编码可以覆盖全世界所有国家的字符；<br>
 2、各种编码之间也会存在冲突的现象，两种不同编码方式可能使用同一个编码代表不同的字符，亦或用不同的编码代表同一个字符；<br>
 3、一个指定的机器（比如我们的服务器）将需要支持许多不同的编码方式，当数据在不同的机器之间传输或者在不同的编码之间转换时，很容易产生乱码问题。</p>
-<p>于是**ISO(国际标谁化组织)**开始着手解决这个问题。 它发起了ISO 10646项目， 名为“Universal Multiple Octet Coded Character Set”，简称UCS。方案中废弃了所有地方性的编码集方案，并尝试把它们融合在一个通用的编码集方案中。同时，<strong>统一码联盟Unicode</strong>(由各个大型企业及组织共同维护)发布了统一码(Unicode)项目。起初，UCS和Unicode并不兼容，但这俩项目本身就是为了解决冲突而生，搞出两套有何意义? 后来Unicode便与UCS统一了。目前的Unicode普遍采用的是UCS-2。</p>
+<p>于是<strong>国际标谁化组织</strong>(ISO)开始着手解决这个问题。 它发起了ISO 10646项目， 名为“Universal Multiple Octet Coded Character Set”，简称UCS。方案中废弃了所有地方性的编码集方案，并尝试把它们融合在一个通用的编码集方案中。同时，<strong>统一码联盟Unicode</strong>(由各个大型企业及组织共同维护)发布了统一码(Unicode)项目。起初，UCS和Unicode并不兼容，但这俩项目本身就是为了解决冲突而生，搞出两套有何意义? 后来Unicode便与UCS统一了。目前的Unicode普遍采用的是UCS-2。</p>
 <p>虽然Unicode帮我们解决了字符集统一的问题，但这并不是没代价的。 在Unicode下所有的字符都是用2(UCS-2)或4(UCS-4)个字节来编码，甚至是ASCII字符。 这样便造成了大量浪费，尤其是在进行网络传输的时候。<br>
 为了解决这一问题，科学家们定义了一种基于Unicode的便于传输的<strong>编码格式UTF(UCS Transfer Format)</strong>， UTF也有UTF-8、UTF-16、UTF-32这几个兄弟 横杠后的数字代表尝试将单个Unicode压缩成几bit。</p>
 <p>比如UTF-8它就将尝试用8bit来表示一个Unicode字。那么用8bit(1字节)来表示16bit(2字节)。 肯定会遇到撑不下的情况，怎么办?</p>
@@ -179,6 +179,28 @@
 现在Windows下的Unicode实现大多使用的都是UTF-16</p>
 <p>windows下的ANSI“编码”<br>
 windows下常见的是一种叫ANSI的编码。 但其实ANSI并不是一种“编码”，<strong>ANSI会根据操作系统系统所在的地域，自动指定为一种地域性的字符集（及其编码方式）</strong>， 如在简体中文的Windows下ANSI其实就是GBK，Windows默认使用ANSI，比如你建一个记事本文件，在里面的字默认会是ANSI的。</p>
+<p>下面介绍下常用的中文编码</p>
+<p>GB2312<br>
+1980年，中国发布了第一个汉字编码标准，也即 GB2312 ，全称《信息交换用汉字编码字符集·基本集》，通常简称GB（“国标”汉语拼音首字母），共收录了6763个常用的汉字和字符，此标准于次年5月实施，它满足了日常99%汉字的使用需求。<br>
+GB2312把每个汉字都编码成两个字节，第一个字节是高位字节，第二个字节是低位字节。GB2312为了兼容ASICII ，其编码需要进行一些转换才能避免和ASICII编码重叠。<br>
+<img src="01.png" alt="图1"><br>
+上图中红色栏表示ASICII的编码范围，绿色栏表示GB2312编码范围。</p>
+<p>GBK<br>
+由于有些汉字是在GB2312标准发布之后才简化的，还有一些人名、繁体字、日语和朝鲜语中的汉字也没有包括在内，所以，在GB2312的基础上添加了这部分字符，就形成了GBK ，全称《汉字内码扩展规范》，共收录了两万多个汉字和字符，它完全兼容GB2312。<br>
+GBK于1995 年发布，不过它只是&quot;技术规范指导性文件&quot;，并<strong>不属于国家标准</strong>。<br>
+和GB2312一样，GBK也是双字节编码，为了向下兼容GB2312， GBK使用了GB2312没有用到的编码区域，总的编码范围是: 第一个字节0x81–0xFE，第二个字节0x40–0xFE， 具体的编码范围细分如下:<br>
+<img src="02.png" alt="图2"><br>
+上述表格中，<br>
+红色栏是GBK中包含的GB2312以及ASICII的编码范围，它们的编码范围保持不变。<br>
+绿色栏的是GBK新增的编码范围。<br>
+紫色栏是用户自定义编码范围。</p>
+<p>GB18030<br>
+GB18030全称《信息技术中文编码字符集》，共收录七万多个汉字和字符， 它在GBK的基础上增加了中日韩语中的汉字和少数名族的文字及字符，<strong>完全兼容</strong>GB2312，<strong>基本兼容</strong>GBK。<br>
+GB18030发布过两个版本，第一版于2000年发布，称为GB18030-2000，第二版于2005年发布，称为GB18030-2005。<br>
+GB18030是<strong>变长多字节</strong>字符集，每个字或字符可以由一个，两个或四个字节组成，所以它的编码空间是很大的，最多可以容纳161万个字符。<br>
+由于需要兼容GBK，四个字节的前两个字节和GBK编码保持一致，GB18030具体的编码范围如下：<br>
+<img src="02.png" alt="图2"></p>
+<p>注意这几个中文编码<strong>既是字符集又是编码格式</strong>，也即字符在字符集中的编号以及存储是进行编码用的编号是完全相同的，而Unicode仅仅是字符集，它只规定了字符的唯一编号，它的存储是用其他的编码格式的，比如UTF-8、UTF-16等等。</p>
 
     </div>
 
@@ -203,9 +225,9 @@ windows下常见的是一种叫ANSI的编码。 但其实ANSI并不是一种“�
           <a href="/tags/%E7%BC%96%E7%A0%81/">编码</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%B9%8B%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%83%8C%E5%90%8E%E7%9A%84%E6%95%B0%E5%AD%A6%E5%8E%9F%E7%90%86/">
+        <a class="prev" href="/post/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%B9%8B%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%95%B0%E5%AD%A6%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">人工神经网络背后的数学原理</span>
+            <span class="prev-text nav-default">卷积神经网络数学原理解析</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
         <a class="next" href="/post/cpu%E6%B5%81%E6%B0%B4%E7%BA%BF/">
