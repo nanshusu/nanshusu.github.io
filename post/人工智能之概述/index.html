@@ -49,7 +49,7 @@
 <meta itemprop="name" content="人工智能概述">
 <meta itemprop="description" content="什么是人工智能 人工智能（Artificial Intelligence），英文缩写为AI。它是研究、开发用于模拟、延伸和扩展人的智能的理论、方"><meta itemprop="datePublished" content="2021-08-26T18:40:22+00:00" />
 <meta itemprop="dateModified" content="2021-08-26T18:40:22+00:00" />
-<meta itemprop="wordCount" content="635">
+<meta itemprop="wordCount" content="2226">
 <meta itemprop="keywords" content="人工智能,机器学习,深度学习," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="人工智能概述"/>
 <meta name="twitter:description" content="什么是人工智能 人工智能（Artificial Intelligence），英文缩写为AI。它是研究、开发用于模拟、延伸和扩展人的智能的理论、方"/>
@@ -140,7 +140,20 @@
     <li><a href="#人工智能的能力边界">人工智能的能力边界</a></li>
     <li><a href="#机器学习和深度学习">机器学习和深度学习</a>
       <ul>
-        <li><a href="#机器学习">机器学习</a></li>
+        <li><a href="#机器学习">机器学习</a>
+          <ul>
+            <li><a href="#机器学习分类">机器学习分类</a></li>
+            <li><a href="#15种经典机器学习算法">15种经典机器学习算法</a></li>
+          </ul>
+        </li>
+        <li><a href="#分类回归聚类降维">分类、回归、聚类、降维</a>
+          <ul>
+            <li><a href="#分类classification--回归regression">分类(classification) &amp; 回归(regression)</a></li>
+            <li><a href="#聚类clustering">聚类(clustering)</a></li>
+            <li><a href="#降维dimensionality-reduction">降维(dimensionality reduction)</a></li>
+            <li><a href="#举例">举例：</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -169,8 +182,110 @@
 <p><img src="03.png" alt="图3"><br>
 如图所示，深度学习和机器学习都是人工智能的子领域，深度学习实际上是机器学习的一个子领域。</p>
 <h2 id="机器学习">机器学习</h2>
-<p>Field of study that gives computers the ability to learn without being explicitly programmed.<br>
-机器学习研究和构建的是一种特殊算法（而非某一个特定的算法），能够让计算机自己在数据中学习从而进行预测。</p>
+<p>机器学习研究和构建的是一种特殊算法（而非某一个特定的算法），能够让计算机自己在数据中学习从而进行预测。<br>
+机器学习的基本思路:<br>
+①把现实生活中的问题抽象成数学模型、并且很清楚模型中不同参数的作用<br>
+②利用数学方法对这个数学模型进行求解，从而解决现实生活中的问题<br>
+③评估这个数学模型，是否真正的解决了现实生活中的问题，解决的如何？<br>
+无论使用什么算法，使用什么样的数据，最根本的思路都逃不出上面的3步！<br>
+从这里我们也能发现: 不是所有问题都可以转换成数学问题的。那些没有办法转换的现实问题AI就没有办法解决。同时最难的部分也就是把现实问题转换为数学问题这一步。<br>
+<img src="04.png" alt="图4"><br>
+通过训练集，不断识别特征，不断建模，最后形成有效的模型，这个过程就叫&quot;机器学习&quot;</p>
+<p><img src="05.png" alt="图5"><br>
+入上图所示，机器学习在实操层面一共分为7步。</p>
+<h3 id="机器学习分类">机器学习分类</h3>
+<p>机器学习根据训练方法大致可以分为3大类: 监督学习、非监督学习、强化学习<br>
+除此之外，大家可能还听过&quot;半监督学习&quot;之类的说法，但是那些都是基于上面3类的变种，本质没有改变。</p>
+<p><strong>监督学习</strong><br>
+监督学习是指我们给算法一个数据集，并且给定正确答案（打标签）。机器通过数据来学习正确答案的计算方法。<br>
+<strong>非监督学习</strong><br>
+非监督学习中，给定的数据集没有&quot;正确答案&quot;，所有的数据都是一样的。无监督学习的任务是从给定的数据集中，挖掘出潜在的结构。<br>
+<strong>强化学习</strong><br>
+强化学习更接近生物学习的本质，因此有望获得更高的智能。它关注的是智能体如何在环境中采取一系列行为、从而获得最大的累积回报。通过强化学习，一个智能体应该知道在什么状态下应该采取什么行为.</p>
+<h3 id="15种经典机器学习算法">15种经典机器学习算法</h3>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>训练方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>线性回归</td>
+<td>监督学习</td>
+</tr>
+<tr>
+<td>逻辑回归</td>
+<td>监督学习</td>
+</tr>
+<tr>
+<td>线性判别分析</td>
+<td>监督学习</td>
+</tr>
+<tr>
+<td>决策树</td>
+<td>监督学习</td>
+</tr>
+<tr>
+<td>朴素贝叶斯</td>
+<td>监督学习</td>
+</tr>
+<tr>
+<td>K邻近</td>
+<td>监督学习</td>
+</tr>
+<tr>
+<td>学习向量量化</td>
+<td>监督学习</td>
+</tr>
+<tr>
+<td>支持向量机</td>
+<td>监督学习</td>
+</tr>
+<tr>
+<td>随机森林</td>
+<td>监督学习</td>
+</tr>
+<tr>
+<td>AdaBoost</td>
+<td>监督学习</td>
+</tr>
+<tr>
+<td>高斯混合模型</td>
+<td>非监督学习</td>
+</tr>
+<tr>
+<td>限制波尔兹曼机</td>
+<td>非监督学习</td>
+</tr>
+<tr>
+<td>K-means 聚类</td>
+<td>非监督学习</td>
+</tr>
+<tr>
+<td>最大期望算法</td>
+<td>非监督学习</td>
+</tr>
+</tbody>
+</table>
+<h2 id="分类回归聚类降维">分类、回归、聚类、降维</h2>
+<p><img src="06.png" alt="图6"><br>
+给定<strong>一个样本特征</strong> , 我们希望预测其对应的属性值 , 如果<strong>是离散的</strong>, 那么这就是一个<strong>分类问题</strong>，反之，如果<strong>是连续的实数</strong>, 这就是一个<strong>回归问题</strong>。<br>
+如果给定<strong>一组样本特征</strong> , 我们没有对应的属性值 , 而是想发掘这组样本<strong>在二维空间的分布</strong>, 比如分析哪些样本靠的更近，哪些样本之间离得很远, 这就是属于<strong>聚类问题</strong>。<br>
+如果我们想用<strong>维数更低的子空间</strong>来表示原来<strong>高维的特征空间</strong>, 那么这就是<strong>降维问题</strong>。</p>
+<h3 id="分类classification--回归regression">分类(classification) &amp; 回归(regression)</h3>
+<p>无论是分类还是回归，都是想建立一个预测模型 ，给定一个输入, 可以得到一个输出。不同的只是在分类问题中, 是离散的; 而在回归问题中是连续的。所以总得来说，两种问题的学习算法都很类似。<br>
+在上面的图谱上，我们看到在分类问题中用到的学习算法，在回归问题中也能使用。分类问题最常用的学习算法包括 SVM (支持向量机) , SGD (随机梯度下降算法), Bayes (贝叶斯估计), Ensemble, KNN 等，而回归问题也能使用 SVR, SGD, Ensemble 等算法，以及其它线性回归算法。</p>
+<h3 id="聚类clustering">聚类(clustering)</h3>
+<p>聚类也是分析样本的属性, 有点类似分类, 不同的是分类在预测之前是知道范围的, 或者说知道到底有几个类别, 而聚类是不知道属性的范围的。所以分类也常常被称为监督式学习(supervised learning), 而聚类就被称为非监督学习(unsupervised learning)。<br>
+聚类事先不知道样本的属性范围，只能凭借样本在特征空间的分布来分析样本的属性。这种问题一般更复杂。而常用的算法包括 k-means (K-均值), GMM (高斯混合模型) 等。</p>
+<h3 id="降维dimensionality-reduction">降维(dimensionality reduction)</h3>
+<p>降维是机器学习另一个重要的领域, 降维有很多重要的应用, 特征的维数过高, 会增加训练的负担与存储空间, 降维就是希望去除特征的冗余, 用更加少的维数来表示特征。降维算法最基础的就是PCA了, 后面的很多算法都是以PCA为基础演化而来。</p>
+<h3 id="举例">举例：</h3>
+<p>预测明天的气温是多少度，这是一个回归任务。(定量输出)<br>
+预测明天是阴、晴还是雨，就是一个分类任务。(定性输出)<br>
+给定一堆无标签的数据、通过聚类算法将数据分类。这是聚类任务。</p>
 
     </div>
 
@@ -241,7 +356,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>nanshusu</span>
+    2023<span class="heart"><i class="iconfont icon-heart"></i></span><span>nanshusu</span>
   </span>
 </div>
 
