@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.93.1 with theme even" />
+<meta name="generator" content="Hugo 0.109.0 with theme even" />
 
 
 <link rel="canonical" href="https://nanshusu.github.io/post/linux%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C%E6%B5%85%E6%9E%90/" />
@@ -35,7 +35,7 @@
 
 
 
-<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link href="/sass/main.min.154ed883776547b0e136be39b3037f61350da06f888d0868d1756a9463cd9520.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -45,7 +45,6 @@
 <meta property="og:url" content="https://nanshusu.github.io/post/linux%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C%E6%B5%85%E6%9E%90/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-08-26T18:40:22+00:00" />
 <meta property="article:modified_time" content="2021-08-26T18:40:22+00:00" />
-
 <meta itemprop="name" content="linux内存屏障浅析">
 <meta itemprop="description" content="内存屏障是一个很神奇的东西，之前翻译了linux内核文档memory-barriers.txt，对内存屏障有了一定有理解。现在用自己的方式来"><meta itemprop="datePublished" content="2021-08-26T18:40:22+00:00" />
 <meta itemprop="dateModified" content="2021-08-26T18:40:22+00:00" />
@@ -85,6 +84,8 @@
         <li class="mobile-menu-item">标签</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">分类</li>
+      </a><a href="/html/index.html">
+        <li class="mobile-menu-item">资料</li>
       </a><a href="/about/">
         <li class="mobile-menu-item">关于</li>
       </a>
@@ -106,6 +107,8 @@
         <a class="menu-item-link" href="/tags/">标签</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/html/index.html">资料</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/about/">关于</a>
       </li>
@@ -153,7 +156,7 @@ CPU的乱序执行并不是任意的乱序，而是以保证程序上下文因�
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="n">a</span><span class="o">++</span><span class="p">;</span> <span class="n">b</span><span class="o">=</span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">);</span> <span class="n">c</span><span class="err">–</span><span class="p">;</span>
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="n">a</span><span class="o">++</span><span class="p">;</span> <span class="n">b</span><span class="o">=</span><span class="nf">f</span><span class="p">(</span><span class="n">a</span><span class="p">);</span> <span class="n">c</span><span class="err">–</span><span class="p">;</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>由于b=f(a)这条指令依赖于前一条指令a++的执行结果，所以b=f(a)将在“执行”阶段之前被阻塞，直到a++的执行结果被生成出来；而c–跟前面没有依赖，它可能在b=f(a)之前就能执行完。（注意，这里的f(a)并不代表一个以a为参数的函数调用，而是代表以a为操作数的指令。C语言的函数调用是需要若干条指令才能实现的，情况要更复杂些。）</p>
@@ -163,7 +166,7 @@ CPU的乱序执行并不是任意的乱序，而是以保证程序上下文因�
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="n">a</span><span class="o">++</span><span class="p">;</span> <span class="n">c</span><span class="err">–</span><span class="p">;</span> <span class="n">b</span><span class="o">=</span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="n">a</span><span class="o">++</span><span class="p">;</span> <span class="n">c</span><span class="err">–</span><span class="p">;</span> <span class="n">b</span><span class="o">=</span><span class="nf">f</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>相比于CPU的乱序，编译器的乱序才是真正对指令顺序做了调整。但是编译器的乱序也必须保证程序上下文的因果关系不发生改变。</p>
@@ -194,7 +197,7 @@ CPU的乱序执行并不是任意的乱序，而是以保证程序上下文因�
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">ready</span><span class="p">)</span> <span class="n">do_something</span><span class="p">(</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">);</span>
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">ready</span><span class="p">)</span> <span class="nf">do_something</span><span class="p">(</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">);</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>虽然这个代码看上去有些别扭，但是似乎没错。不过，考虑到乱序，如果标志被置位先于data被设置，那么结果很可能就杯具了。因为从字面上看，前面的那两条指令其实并不存在显式的因果关系，乱序是有可能发生的。</p>
@@ -207,7 +210,7 @@ CPU的乱序执行并不是任意的乱序，而是以保证程序上下文因�
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="n">tmp</span> <span class="o">=</span> <span class="n">ttt</span><span class="p">;</span> <span class="n">addr</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="n">mb</span><span class="p">();</span> <span class="n">val</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="n">tmp</span> <span class="o">=</span> <span class="n">ttt</span><span class="p">;</span> <span class="n">addr</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="nf">mb</span><span class="p">();</span> <span class="n">val</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>有了内存屏障就了确保先设置地址端口，再读数据端口。而至于设置地址端口与tmp的赋值孰先孰后，屏障则不做干预。</p>
@@ -223,8 +226,8 @@ CPU的乱序执行并不是任意的乱序，而是以保证程序上下文因�
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="n">obj</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">=</span> <span class="n">xxx</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">wmb</span><span class="p">();</span> <span class="k">if</span> <span class="p">(</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">ready</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">obj</span><span class="o">-&gt;</span><span class="n">ready</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">do_something</span><span class="p">(</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">wmb</span><span class="p">();</span> <span class="k">if</span> <span class="p">(</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">ready</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">obj</span><span class="o">-&gt;</span><span class="n">ready</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nf">do_something</span><span class="p">(</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">);</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>前面也说过，必须要使用屏障来保证CPU-a不发生乱序，从而使得ready标记置位的时候，data一定是有效的。但是在多处理器情况下，这还不够。data和ready标记的新值可能以相反的顺序更新到CPU-b上！<br>
@@ -242,8 +245,8 @@ CPU的乱序执行并不是任意的乱序，而是以保证程序上下文因�
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="n">obj</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">=</span> <span class="n">xxx</span><span class="p">;</span> <span class="k">if</span> <span class="p">(</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">ready</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">wmb</span><span class="p">();</span> <span class="n">rmb</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl"><span class="n">obj</span><span class="o">-&gt;</span><span class="n">ready</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">do_something</span><span class="p">(</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">wmb</span><span class="p">();</span> <span class="nf">rmb</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">obj</span><span class="o">-&gt;</span><span class="n">ready</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nf">do_something</span><span class="p">(</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">);</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>CPU-b上使用的读屏障还有一种弱化版本，它不保证读操作的有序性，叫做数据依赖屏障。顾名思义，它是在具有数据依赖情况下使用的屏障，因为有数据依赖（也就是之前所说的显式的因果关系），所以CPU和编译器已经能够保证指令的顺序。<br>
@@ -255,7 +258,7 @@ CPU的乱序执行并不是任意的乱序，而是以保证程序上下文因�
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="n">init</span><span class="p">(</span><span class="n">newval</span><span class="p">);</span> <span class="n">p</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="nf">init</span><span class="p">(</span><span class="n">newval</span><span class="p">);</span> <span class="n">p</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">data</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">newval</span><span class="p">;</span> <span class="n">val</span> <span class="o">=</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
 </span></span></code></pre></td></tr></table>
@@ -347,7 +350,7 @@ CPU的乱序执行并不是任意的乱序，而是以保证程序上下文因�
 
 
 
-<script type="text/javascript" src="/js/main.min.64437849d125a2d603b3e71d6de5225d641a32d17168a58106e0b61852079683.js"></script>
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
   <script type="text/javascript">
     window.MathJax = {
       tex: {
