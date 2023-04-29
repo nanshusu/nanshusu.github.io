@@ -48,7 +48,7 @@
 <meta itemprop="name" content="KMS服务器搭建及系统激活">
 <meta itemprop="description" content="准备KMS服务器 可以找网上现成的，也可以自己搭建: 1)下载KMS，vlmcsd 或者 vlmcsdmulti 百度/MEGA/github (前两个zip的解压密码为2"><meta itemprop="datePublished" content="2021-08-26T18:40:22+00:00" />
 <meta itemprop="dateModified" content="2021-08-26T18:40:22+00:00" />
-<meta itemprop="wordCount" content="2845">
+<meta itemprop="wordCount" content="2855">
 <meta itemprop="keywords" content="KMS,激活," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="KMS服务器搭建及系统激活"/>
 <meta name="twitter:description" content="准备KMS服务器 可以找网上现成的，也可以自己搭建: 1)下载KMS，vlmcsd 或者 vlmcsdmulti 百度/MEGA/github (前两个zip的解压密码为2"/>
@@ -202,7 +202,7 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># firewall-cmd --zone=public --add-port=1688/tcp --permanent </span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># firewall-cmd --zone=public --add-port=1688/tcp --permanent</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># firewall-cmd reload</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -217,12 +217,14 @@ telnet you.host.ip port 	#如果能够连通，就可以进行下一步</p>
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">slmgr /upk 				#是用于卸载当前电脑的密钥
-</span></span><span class="line"><span class="cl">slmgr /ipk M7XTQ-FN8P6-TTKYV-9D4CC-J462D	#安装、替换现有的产品密钥。
-</span></span><span class="line"><span class="cl">slmgr /skms 192.168.1.1			#设置KMS主机名。一般为IP地址
-</span></span><span class="line"><span class="cl">slmgr /ato                                    	#激活
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">slmgr /dlv                               #查看激活信息
+</span></span><span class="line"><span class="cl">slmgr /upk                               #是用于卸载当前电脑的密钥
+</span></span><span class="line"><span class="cl">slmgr /ipk M7XTQ-FN8P6-TTKYV-9D4CC-J462D #安装、替换现有的产品密钥。
+</span></span><span class="line"><span class="cl">slmgr /skms 192.168.1.1                  #设置KMS主机名。一般为IP地址
+</span></span><span class="line"><span class="cl">slmgr /ato                               #激活
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>清除KMS信息</p>
@@ -281,14 +283,14 @@ telnet you.host.ip port 	#如果能够连通，就可以进行下一步</p>
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl"><span class="k">cd</span> <span class="s2">&#34;C:\Program Files\Microsoft Office\Office16&#34;</span>		#进入office安装目录
-</span></span><span class="line"><span class="cl">cscript ospp.vbs /unpkey:xxxxx	#卸载已安装的产品密钥。后面的数字是密钥的最后5位数
-</span></span><span class="line"><span class="cl">cscript ospp.vbs /inpkey:XQNVK-8JYDB-WJ9W3-YJ8YR-WFG99	#替换VOL的密钥
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl"><span class="k">cd</span> <span class="s2">&#34;C:\Program Files\Microsoft Office\Office16&#34;</span>        #进入office安装目录
+</span></span><span class="line"><span class="cl">cscript ospp.vbs /unpkey:xxxxx                         #卸载已安装的产品密钥。后面的数字是密钥的最后5位数
+</span></span><span class="line"><span class="cl">cscript ospp.vbs /inpkey:XQNVK-8JYDB-WJ9W3-YJ8YR-WFG99 #更换VOL的密钥
 </span></span><span class="line"><span class="cl">cscript ospp.vbs /inpkey:PD3PC-RHNGV-FXJ29-8JK7D-RJRJK
-</span></span><span class="line"><span class="cl">cscript ospp.vbs /sethst:you-kms-server	#注册kms服务器地址
-</span></span><span class="line"><span class="cl">cscript ospp.vbs /act	#执行激活
-</span></span><span class="line"><span class="cl">cscript ospp.vbs /dstatus	#显示当前已安装产品密钥的许可证信息。可以查看到自已安裝的版本有多少个序列号。
-</span></span><span class="line"><span class="cl">cscript ospp.vbs /remhst	#删除KMS主机名。
+</span></span><span class="line"><span class="cl">cscript ospp.vbs /sethst:you-kms-server                #注册kms服务器地址
+</span></span><span class="line"><span class="cl">cscript ospp.vbs /act                                  #执行激活
+</span></span><span class="line"><span class="cl">cscript ospp.vbs /dstatus                              #显示当前已安装产品密钥的许可证信息。可以查看到自已安裝的版本有多少个序列号。
+</span></span><span class="line"><span class="cl">cscript ospp.vbs /remhst                               #删除KMS主机名。
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="序列号">序列号</h1>

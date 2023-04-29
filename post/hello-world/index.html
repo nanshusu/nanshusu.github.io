@@ -48,7 +48,7 @@
 <meta itemprop="name" content="Hello World">
 <meta itemprop="description" content="Welcome to Hugo! This is your very first post. Check documentation for more info. 快速开始 生成站点 使用Hugo快速生成站点，比如希望生成到/path/to/site路径： 1 $ hugo new site /path/to/site 安装皮肤 挑选"><meta itemprop="datePublished" content="2017-01-01T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2017-01-01T00:00:00+00:00" />
-<meta itemprop="wordCount" content="810">
+<meta itemprop="wordCount" content="1025">
 <meta itemprop="keywords" content="Hugo,计算机," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Hello World"/>
 <meta name="twitter:description" content="Welcome to Hugo! This is your very first post. Check documentation for more info. 快速开始 生成站点 使用Hugo快速生成站点，比如希望生成到/path/to/site路径： 1 $ hugo new site /path/to/site 安装皮肤 挑选"/>
@@ -153,6 +153,7 @@
         <li><a href="#问题">问题</a>
           <ul>
             <li><a href="#q1-多行数学公式">Q1 多行数学公式</a></li>
+            <li><a href="#添加静态页面不是hugo通过md文件生成的页面">添加静态页面（不是hugo通过md文件生成的页面）</a></li>
           </ul>
         </li>
       </ul>
@@ -323,6 +324,26 @@ $$<br>
 &amp;=i<br>
 \end{split}\end{equation}<br>
 $$</p>
+<h3 id="添加静态页面不是hugo通过md文件生成的页面">添加静态页面（不是hugo通过md文件生成的页面）</h3>
+<p>1、将页面添加到导航栏中<br>
+在config.toml中增加静态页面导航</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[[menu.main]]
+</span></span><span class="line"><span class="cl">  name = &#34;资料&#34;
+</span></span><span class="line"><span class="cl">  weight = 40
+</span></span><span class="line"><span class="cl">  url = &#34;/html/index.html&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>2、在static目录下按&quot;/html/index.html&quot;组织静态页面<br>
+static目录下的文件会直接拷贝到/public(hugo -D生成静态页面目录)，该文件夹的优先级高于主题下的/static文件夹<br>
+index.html就是希望添加的页面</p>
 
     </div>
 
